@@ -123,6 +123,37 @@ namespace Persistence.Migrations
                     b.ToTable("Sessions");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Ticket", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("SessionId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("TicketType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SessionId");
+
+                    b.ToTable("Tickets");
+                });
+
             modelBuilder.Entity("Domain.Entities.Session", b =>
                 {
                     b.HasOne("Domain.Entities.Movie", "Movie")
@@ -142,6 +173,17 @@ namespace Persistence.Migrations
                     b.Navigation("ScreeningRoom");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Ticket", b =>
+                {
+                    b.HasOne("Domain.Entities.Session", "Session")
+                        .WithMany("Tickets")
+                        .HasForeignKey("SessionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Session");
+                });
+
             modelBuilder.Entity("Domain.Entities.Movie", b =>
                 {
                     b.Navigation("Sessions");
@@ -150,6 +192,11 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.ScreeningRoom", b =>
                 {
                     b.Navigation("Sessions");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Session", b =>
+                {
+                    b.Navigation("Tickets");
                 });
 #pragma warning restore 612, 618
         }

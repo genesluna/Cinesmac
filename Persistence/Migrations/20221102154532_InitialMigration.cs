@@ -77,6 +77,29 @@ namespace Persistence.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Tickets",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Date = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    TicketType = table.Column<int>(type: "INTEGER", nullable: false),
+                    Price = table.Column<decimal>(type: "TEXT", nullable: false),
+                    SessionId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tickets", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tickets_Sessions_SessionId",
+                        column: x => x.SessionId,
+                        principalTable: "Sessions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Sessions_MovieId",
                 table: "Sessions",
@@ -86,10 +109,18 @@ namespace Persistence.Migrations
                 name: "IX_Sessions_ScreeningRoomId",
                 table: "Sessions",
                 column: "ScreeningRoomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_SessionId",
+                table: "Tickets",
+                column: "SessionId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Tickets");
+
             migrationBuilder.DropTable(
                 name: "Sessions");
 
