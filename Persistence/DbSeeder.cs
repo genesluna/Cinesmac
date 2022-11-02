@@ -26,7 +26,7 @@ public static class DbSeeder
         Genre = "Comédia",
         Length = 106,
         IMDBScore = 8.1,
-        ImageURL = "",
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_240/v1667405550/Cinesmac/quixeramobim.jpg",
         Is3D = true,
         IsIMAX = false
       },
@@ -38,7 +38,7 @@ public static class DbSeeder
         Genre = "Ação",
         Length = 125,
         IMDBScore = 7.1,
-        ImageURL = "",
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_240/v1667405550/Cinesmac/adao-negro.jpg",
         Is3D = true,
         IsIMAX = false
       },
@@ -50,7 +50,7 @@ public static class DbSeeder
         Genre = "Drama",
         Length = 135,
         IMDBScore = 6.8,
-        ImageURL = "",
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_240/v1667405549/Cinesmac/woman-king.jpg",
         Is3D = false,
         IsIMAX = true
       },
@@ -62,7 +62,7 @@ public static class DbSeeder
         Genre = "Aventura",
         Length = 141,
         IMDBScore = 7.4,
-        ImageURL = "",
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_240/v1667405550/Cinesmac/mulher-maravilha.jpg",
         Is3D = false,
         IsIMAX = true
       },
@@ -74,7 +74,7 @@ public static class DbSeeder
         Genre = "Ação",
         Length = 242,
         IMDBScore = 8.0,
-        ImageURL = "",
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_240/v1667405551/Cinesmac/liga-da-justica.jpg",
         Is3D = false,
         IsIMAX = false
       },
@@ -86,7 +86,7 @@ public static class DbSeeder
         Genre = "Ação",
         Length = 130,
         IMDBScore = 7.9,
-        ImageURL = "",
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_240/v1667405549/Cinesmac/thor-ragnarok.jpg",
         Is3D = false,
         IsIMAX = false
       },
@@ -98,7 +98,7 @@ public static class DbSeeder
         Genre = "Suspense",
         Length = 127,
         IMDBScore = 7.3,
-        ImageURL = "",
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_240/v1667405552/Cinesmac/trem-bala.jpg",
         Is3D = false,
         IsIMAX = false
       },
@@ -110,7 +110,7 @@ public static class DbSeeder
         Genre = "Comédia",
         Length = 108,
         IMDBScore = 8.0,
-        ImageURL = "",
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_240/v1667405549/Cinesmac/deadpool.jpg",
         Is3D = false,
         IsIMAX = false
       },
@@ -122,7 +122,7 @@ public static class DbSeeder
         Genre = "Ação",
         Length = 130,
         IMDBScore = 8.4,
-        ImageURL = "",
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_240/v1667405550/Cinesmac/topgun.jpg",
         Is3D = false,
         IsIMAX = false
       },
@@ -134,7 +134,7 @@ public static class DbSeeder
         Genre = "Ação",
         Length = 152,
         IMDBScore = 9.0,
-        ImageURL = "",
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_240/v1667405550/Cinesmac/cavaleiro-das-trevas.jpg",
         Is3D = false,
         IsIMAX = false
       }
