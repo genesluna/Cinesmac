@@ -9,4 +9,5 @@ public class Session : BaseEntity
   public Movie Movie { get; set; }
   public Guid ScreeningRoomId { get; set; }
   public ScreeningRoom ScreeningRoom { get; set; }
+  public ICollection<Ticket> Tickets { get; set; }
 }
