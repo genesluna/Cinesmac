@@ -11,7 +11,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221102154532_InitialMigration")]
+    [Migration("20221102163047_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -132,9 +132,6 @@ namespace Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTimeOffset>("Date")
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("Price")

@@ -82,7 +82,6 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Date = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
                     TicketType = table.Column<int>(type: "INTEGER", nullable: false),
                     Price = table.Column<decimal>(type: "TEXT", nullable: false),
                     SessionId = table.Column<Guid>(type: "TEXT", nullable: false),
