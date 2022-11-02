@@ -13,6 +13,8 @@ public static class ApplicationServiceExtensions
 {
   public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
   {
+    services.AddControllers();
+    services.AddEndpointsApiExplorer();
     services.AddFluentValidationAutoValidation();
     services.AddValidatorsFromAssemblyContaining<MovieCreateValidator>();
     services.AddSwaggerGen();
