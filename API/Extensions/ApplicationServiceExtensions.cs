@@ -16,6 +16,13 @@ public static class ApplicationServiceExtensions
     services.AddFluentValidationAutoValidation();
     services.AddValidatorsFromAssemblyContaining<MovieCreateValidator>();
     services.AddSwaggerGen();
+    services.AddCors(opt =>
+    {
+      opt.AddPolicy("CorsPolicy", policy =>
+      {
+        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+      });
+    });
 
     services.AddDbContext<DataContext>(opt =>
     {
