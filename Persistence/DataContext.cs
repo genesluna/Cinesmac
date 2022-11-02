@@ -12,6 +12,7 @@ public class DataContext : DbContext
   public DbSet<Movie> Movies { get; set; }
   public DbSet<ScreeningRoom> ScreeningRooms { get; set; }
   public DbSet<Session> Sessions { get; set; }
+  public DbSet<Ticket> Tickets { get; set; }
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
@@ -25,6 +26,12 @@ public class DataContext : DbContext
         .HasOne<ScreeningRoom>(s => s.ScreeningRoom)
         .WithMany(sr => sr.Sessions)
         .HasForeignKey(s => s.ScreeningRoomId)
+        .OnDelete(DeleteBehavior.Restrict);
+
+    modelBuilder.Entity<Ticket>()
+        .HasOne<Session>(t => t.Session)
+        .WithMany(s => s.Tickets)
+        .HasForeignKey(t => t.SessionId)
         .OnDelete(DeleteBehavior.Restrict);
   }
 
