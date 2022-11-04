@@ -1,9 +1,11 @@
+using API.Errors;
 using Application.Core;
 using Application.Movies.UseCases;
 using Application.Movies.Validators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -18,6 +20,26 @@ public static class ApplicationServiceExtensions
     services.AddFluentValidationAutoValidation();
     services.AddValidatorsFromAssemblyContaining<MovieCreateValidator>();
     services.AddSwaggerGen();
+
+    services.Configure<ApiBehaviorOptions>(opt =>
+    {
+      opt.InvalidModelStateResponseFactory = actionContext =>
+      {
+        var errors = actionContext.ModelState
+            .Where(e => e.Value.Errors.Count > 0)
+            .SelectMany(x => x.Value.Errors)
+            .Select(x => x.ErrorMessage)
+            .ToArray();
+
+        var errorResponse = new ApiValidationErrorResponse
+        {
+          Errors = errors
+        };
+
+        return new BadRequestObjectResult(errorResponse);
+      };
+    });
+
     services.AddCors(opt =>
     {
       opt.AddPolicy("CorsPolicy", policy =>

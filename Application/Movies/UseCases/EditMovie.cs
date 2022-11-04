@@ -1,3 +1,4 @@
+using Application.Core;
 using Application.Movies.Dtos;
 using AutoMapper;
 using MediatR;
@@ -7,12 +8,12 @@ namespace Application.Movies.UseCases;
 
 public class EditMovie
 {
-  public class Command : IRequest
+  public class Command : IRequest<Result<Unit>>
   {
     public MovieEditDto Movie { get; set; }
   }
 
-  public class Handler : IRequestHandler<Command>
+  public class Handler : IRequestHandler<Command, Result<Unit>>
   {
     private readonly DataContext _context;
     private readonly IMapper _mapper;
@@ -22,15 +23,21 @@ public class EditMovie
       _context = context;
     }
 
-    public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+    public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
     {
       var movie = await _context.Movies.FindAsync(request.Movie.Id);
 
+      if (movie == null)
+        return Result<Unit>.Failure(ErrorType.NotFound, "Movie not found");
+
       _mapper.Map(request.Movie, movie);
 
-      await _context.SaveChangesAsync();
+      var result = await _context.SaveChangesAsync() > 0;
 
-      return Unit.Value;
+      if (!result)
+        return Result<Unit>.Failure(ErrorType.SaveChangesError, "Failed to edit movie");
+
+      return Result<Unit>.Success(Unit.Value);
     }
   }
 }

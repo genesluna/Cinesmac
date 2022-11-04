@@ -1,3 +1,4 @@
+using Application.Core;
 using Application.Movies.Dtos;
 using AutoMapper;
 using MediatR;
@@ -8,9 +9,9 @@ namespace Application.Movies.UseCases;
 
 public class ListMovies
 {
-  public class Query : IRequest<List<MovieDto>> { }
+  public class Query : IRequest<Result<IReadOnlyList<MovieDto>>> { }
 
-  public class Handler : IRequestHandler<Query, List<MovieDto>>
+  public class Handler : IRequestHandler<Query, Result<IReadOnlyList<MovieDto>>>
   {
     private readonly DataContext _context;
     private readonly IMapper _mapper;
@@ -20,15 +21,16 @@ public class ListMovies
       _context = context;
     }
 
-    public async Task<List<MovieDto>> Handle(Query request, CancellationToken cancellationToken)
+    public async Task<Result<IReadOnlyList<MovieDto>>> Handle(Query request, CancellationToken cancellationToken)
     {
       var movies = await _context.Movies
               .Include(m => m.Sessions)
               .ThenInclude(s => s.ScreeningRoom)
               .ToListAsync(cancellationToken);
 
-      var moviesDto = _mapper.Map<List<MovieDto>>(movies);
-      return moviesDto;
+      var moviesDto = _mapper.Map<IReadOnlyList<MovieDto>>(movies);
+
+      return Result<IReadOnlyList<MovieDto>>.Success(moviesDto);
     }
   }
 }

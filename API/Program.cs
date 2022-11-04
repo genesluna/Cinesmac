@@ -1,6 +1,7 @@
 using Persistence;
 using Microsoft.EntityFrameworkCore;
 using API.Extensions;
+using API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,11 +26,14 @@ catch (Exception ex)
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
+
+  app.UseMiddleware<ExceptionMiddleware>();
 {
-  app.UseDeveloperExceptionPage();
   app.UseSwagger();
   app.UseSwaggerUI();
 }
+
+app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
 app.UseHttpsRedirection();
 

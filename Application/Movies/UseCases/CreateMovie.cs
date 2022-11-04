@@ -1,3 +1,4 @@
+using Application.Core;
 using Application.Movies.Dtos;
 using AutoMapper;
 using Domain.Entities;
@@ -8,12 +9,12 @@ namespace Application.Movies.UseCases;
 
 public class CreateMovie
 {
-  public class Command : IRequest
+  public class Command : IRequest<Result<MovieDto>>
   {
     public MovieCreateDto Movie { get; set; }
   }
 
-  public class Handler : IRequestHandler<Command>
+  public class Handler : IRequestHandler<Command, Result<MovieDto>>
   {
     private readonly DataContext _context;
     private readonly IMapper _mapper;
@@ -23,13 +24,17 @@ public class CreateMovie
       _context = context;
     }
 
-    public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+    public async Task<Result<MovieDto>> Handle(Command request, CancellationToken cancellationToken)
     {
       var movieToAdd = _mapper.Map<Movie>(request.Movie);
       _context.Movies.Add(movieToAdd);
-      await _context.SaveChangesAsync();
 
-      return Unit.Value;
+      var result = await _context.SaveChangesAsync() > 0;
+
+      if (!result)
+        return Result<MovieDto>.Failure(ErrorType.SaveChangesError, "Failed to create movie");
+
+      return Result<MovieDto>.Success(_mapper.Map<MovieDto>(movieToAdd));
     }
   }
 }

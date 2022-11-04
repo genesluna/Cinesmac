@@ -1,3 +1,4 @@
+using Application.Core;
 using Application.Movies.Dtos;
 using AutoMapper;
 using MediatR;
@@ -8,12 +9,12 @@ namespace Application.Movies.UseCases;
 
 public class DetailMovie
 {
-  public class Query : IRequest<MovieDto>
+  public class Query : IRequest<Result<MovieDto>>
   {
     public Guid Id { get; set; }
   }
 
-  public class Handler : IRequestHandler<Query, MovieDto>
+  public class Handler : IRequestHandler<Query, Result<MovieDto>>
   {
     private readonly DataContext _context;
     private readonly IMapper _mapper;
@@ -23,16 +24,17 @@ public class DetailMovie
       _context = context;
     }
 
-    public async Task<MovieDto> Handle(Query request, CancellationToken cancellationToken)
+    public async Task<Result<MovieDto>> Handle(Query request, CancellationToken cancellationToken)
     {
       var movie = await _context.Movies
             .Include(m => m.Sessions)
             .ThenInclude(s => s.ScreeningRoom)
             .FirstOrDefaultAsync(x => x.Id == request.Id);
 
-      var movieDto = _mapper.Map<MovieDto>(movie);
+      if (movie == null)
+        return Result<MovieDto>.Failure(ErrorType.NotFound, "Movie not found");
 
-      return movieDto;
+      return Result<MovieDto>.Success(_mapper.Map<MovieDto>(movie));
     }
   }
 }
