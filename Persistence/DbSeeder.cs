@@ -221,8 +221,8 @@ public static class DbSeeder
     {
       var sessions = new List<Session>{
         new Session{
-          StarTime = "09hs",
-          EndTime = "11hs",
+          StarTime = "10hs",
+          EndTime = "12hs",
           BasePrice = 32,
           MovieId = movies[i].Id,
           ScreeningRoomId = screeningRooms[i].Id
@@ -235,15 +235,8 @@ public static class DbSeeder
           ScreeningRoomId = screeningRooms[i].Id
         },
         new Session{
-          StarTime = "15hs",
-          EndTime = "17hs",
-          BasePrice = 32,
-          MovieId = movies[i].Id,
-          ScreeningRoomId = screeningRooms[i].Id
-        },
-        new Session{
-          StarTime = "17hs",
-          EndTime = "19hs",
+          StarTime = "16hs",
+          EndTime = "18hs",
           BasePrice = 32,
           MovieId = movies[i].Id,
           ScreeningRoomId = screeningRooms[i].Id
@@ -251,6 +244,13 @@ public static class DbSeeder
         new Session{
           StarTime = "19hs",
           EndTime = "21hs",
+          BasePrice = 32,
+          MovieId = movies[i].Id,
+          ScreeningRoomId = screeningRooms[i].Id
+        },
+        new Session{
+          StarTime = "22hs",
+          EndTime = "00hs",
           BasePrice = 32,
           MovieId = movies[i].Id,
           ScreeningRoomId = screeningRooms[i].Id
