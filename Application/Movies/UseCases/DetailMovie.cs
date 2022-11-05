@@ -1,6 +1,7 @@
 using Application.Core;
 using Application.Movies.Dtos;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -27,14 +28,13 @@ public class DetailMovie
     public async Task<Result<MovieDto>> Handle(Query request, CancellationToken cancellationToken)
     {
       var movie = await _context.Movies
-            .Include(m => m.Sessions)
-            .ThenInclude(s => s.ScreeningRoom)
+            .ProjectTo<MovieDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(x => x.Id == request.Id);
 
       if (movie == null)
         return Result<MovieDto>.Failure(ErrorType.NotFound, "Movie not found");
 
-      return Result<MovieDto>.Success(_mapper.Map<MovieDto>(movie));
+      return Result<MovieDto>.Success(movie);
     }
   }
 }
