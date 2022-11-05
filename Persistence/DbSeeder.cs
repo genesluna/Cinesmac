@@ -20,18 +20,6 @@ public static class DbSeeder
     {
       new Movie
       {
-        Title = "Bem-vinda a Quixeramobim",
-        Description = "Uma comédia que conta a história de Aimee, uma mulher de trinta e poucos anos, herdeira de um empresário milionário envolvido em um caso de corrupção. Forçada pela primeira vez a ficar sem o dinheiro do pai para se sustentar, Aimée terá que se refugiar em sua última propriedade que resta da família: uma fazenda em ruínas em Quixeramobim, no interior do Ceará.",
-        Director = "Halder Gomes",
-        Genre = "Comédia",
-        Length = 106,
-        IMDBScore = 8.1,
-        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,h_355,w_240/v1667405550/Cinesmac/quixeramobim.jpg",
-        Is3D = true,
-        IsIMAX = false
-      },
-      new Movie
-      {
         Title = "Adão Negro",
         Description = "Quase 5.000 anos depois de ter sido concedido com os poderes onipotentes dos deuses egípcios - e preso com a mesma rapidez - Adão Negro é libertado de sua tumba terrena, pronto para liberar sua forma única de justiça no mundo moderno.",
         Director = "Jaume Collet-Serra",
@@ -44,15 +32,15 @@ public static class DbSeeder
       },
       new Movie
       {
-        Title = "Mulher Rei",
-        Description = "Um épico histórico inspirado em fatos reais ocorridos no Reino do Daomé, um dos estados mais poderosos da África nos séculos XVIII e XIX.",
-        Director = "Gina Prince-Bythewood",
-        Genre = "Drama",
-        Length = 135,
-        IMDBScore = 6.8,
-        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,h_355,w_240/v1667405549/Cinesmac/woman-king.jpg",
-        Is3D = false,
-        IsIMAX = true
+        Title = "Thor: Ragnarok",
+        Description = "Thor está aprisionado do outro lado do universo, sem seu martelo, e se vê em uma corrida para voltar até Asgard e impedir o Ragnarok, que está nas mãos de uma nova e poderosa ameaça, a terrível Hela.",
+        Director = "Taika Waititi",
+        Genre = "Ação",
+        Length = 130,
+        IMDBScore = 7.9,
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,h_355,w_240/v1667405549/Cinesmac/thor-ragnarok.jpg",
+        Is3D = true,
+        IsIMAX = false
       },
       new Movie
       {
@@ -76,17 +64,17 @@ public static class DbSeeder
         IMDBScore = 8.0,
         ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,h_355,w_240/v1667405551/Cinesmac/liga-da-justica.jpg",
         Is3D = false,
-        IsIMAX = false
+        IsIMAX = true
       },
       new Movie
       {
-        Title = "Thor: Ragnarok",
-        Description = "Thor está aprisionado do outro lado do universo, sem seu martelo, e se vê em uma corrida para voltar até Asgard e impedir o Ragnarok, que está nas mãos de uma nova e poderosa ameaça, a terrível Hela.",
-        Director = "Taika Waititi",
-        Genre = "Ação",
-        Length = 130,
-        IMDBScore = 7.9,
-        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,h_355,w_240/v1667405549/Cinesmac/thor-ragnarok.jpg",
+        Title = "Mulher Rei",
+        Description = "Um épico histórico inspirado em fatos reais ocorridos no Reino do Daomé, um dos estados mais poderosos da África nos séculos XVIII e XIX.",
+        Director = "Gina Prince-Bythewood",
+        Genre = "Drama",
+        Length = 135,
+        IMDBScore = 6.8,
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,h_355,w_240/v1667405549/Cinesmac/woman-king.jpg",
         Is3D = false,
         IsIMAX = false
       },
@@ -135,6 +123,18 @@ public static class DbSeeder
         Length = 152,
         IMDBScore = 9.0,
         ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,h_355,w_240/v1667405550/Cinesmac/cavaleiro-das-trevas.jpg",
+        Is3D = false,
+        IsIMAX = false
+      },
+      new Movie
+      {
+        Title = "Bem-vinda a Quixeramobim",
+        Description = "Uma comédia que conta a história de Aimee, uma mulher de trinta e poucos anos, herdeira de um empresário milionário envolvido em um caso de corrupção. Forçada pela primeira vez a ficar sem o dinheiro do pai para se sustentar, Aimée terá que se refugiar em sua última propriedade que resta da família: uma fazenda em ruínas em Quixeramobim, no interior do Ceará.",
+        Director = "Halder Gomes",
+        Genre = "Comédia",
+        Length = 106,
+        IMDBScore = 8.1,
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,h_355,w_240/v1667405550/Cinesmac/quixeramobim.jpg",
         Is3D = false,
         IsIMAX = false
       }
