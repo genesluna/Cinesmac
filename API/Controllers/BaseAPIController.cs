@@ -1,5 +1,6 @@
 using System.Net;
 using API.Errors;
+using API.Extensions;
 using Application.Core;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,7 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]
-public class BaseAPIController : ControllerBase
+public abstract class BaseAPIController : ControllerBase
 {
   private IMediator _mediator;
   protected IMediator Mediator => _mediator ??=
@@ -19,18 +20,28 @@ public class BaseAPIController : ControllerBase
     if (result.IsSuccess)
       return Ok(result.Value);
     else
-    {
-      return result.ErrorType switch
-      {
-        ErrorType.NotFound => NotFound(new ApiResponse((int)HttpStatusCode.NotFound, result.ErrorMessage)),
-        ErrorType.SaveChangesError => BadRequest(new ApiResponse((int)HttpStatusCode.BadRequest, result.ErrorMessage)),
-        _ => BadRequest()
-      };
-    }
+      return HandleError(result.ErrorType, result.ErrorMessage);
   }
 
   protected ActionResult HandleResult<T>(Result<PagedList<T>> result)
   {
-    return BadRequest();
+    if (result.IsSuccess)
+    {
+      Response.AddPaginationsHeaders(result.Value.CurrentPage, result.Value.PageSize,
+          result.Value.TotalPages, result.Value.TotalCount);
+      return Ok(result.Value);
+    }
+    else
+      return HandleError(result.ErrorType, result.ErrorMessage);
+  }
+
+  private ActionResult HandleError(ErrorType errorType, string errorMessage)
+  {
+    return errorType switch
+    {
+      ErrorType.NotFound => NotFound(new ApiResponse((int)HttpStatusCode.NotFound, errorMessage)),
+      ErrorType.SaveChangesError => BadRequest(new ApiResponse((int)HttpStatusCode.BadRequest, errorMessage)),
+      _ => BadRequest()
+    };
   }
 }

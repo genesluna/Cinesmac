@@ -1,3 +1,4 @@
+using Application.Core;
 using Application.Movies.Dtos;
 using Application.Movies.UseCases;
 using Microsoft.AspNetCore.Mvc;
@@ -7,9 +8,10 @@ namespace API.Controllers;
 public class MoviesController : BaseAPIController
 {
   [HttpGet]
-  public async Task<ActionResult<IReadOnlyList<MovieDto>>> GetMovies(CancellationToken cancellationToken)
+  public async Task<ActionResult<PagedList<MovieDto>>> GetMovies([FromQuery] PagingParameters pagingParams,
+    CancellationToken cancellationToken)
   {
-    return HandleResult(await Mediator.Send(new ListMovies.Query(), cancellationToken));
+    return HandleResult(await Mediator.Send(new ListMovies.Query { PagingParams = pagingParams }, cancellationToken));
   }
 
   [HttpGet("{id}")]
