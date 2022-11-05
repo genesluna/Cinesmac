@@ -2,8 +2,8 @@ namespace Domain.Entities;
 
 public class Session : BaseEntity
 {
-  public string StarTime { get; set; }
-  public string EndTime { get; set; }
+  public int StarTime { get; set; }
+  public int EndTime { get; set; }
   public decimal BasePrice { get; set; }
   public Guid MovieId { get; set; }
   public Movie Movie { get; set; }

@@ -221,36 +221,36 @@ public static class DbSeeder
     {
       var sessions = new List<Session>{
         new Session{
-          StarTime = "10hs",
-          EndTime = "12hs",
+          StarTime = 10,
+          EndTime = 12,
           BasePrice = 32,
           MovieId = movies[i].Id,
           ScreeningRoomId = screeningRooms[i].Id
         },
         new Session{
-          StarTime = "13hs",
-          EndTime = "15hs",
+          StarTime = 13,
+          EndTime = 15,
           BasePrice = 32,
           MovieId = movies[i].Id,
           ScreeningRoomId = screeningRooms[i].Id
         },
         new Session{
-          StarTime = "16hs",
-          EndTime = "18hs",
+          StarTime = 16,
+          EndTime = 18,
           BasePrice = 32,
           MovieId = movies[i].Id,
           ScreeningRoomId = screeningRooms[i].Id
         },
         new Session{
-          StarTime = "19hs",
-          EndTime = "21hs",
+          StarTime = 19,
+          EndTime = 21,
           BasePrice = 32,
           MovieId = movies[i].Id,
           ScreeningRoomId = screeningRooms[i].Id
         },
         new Session{
-          StarTime = "22hs",
-          EndTime = "00hs",
+          StarTime = 22,
+          EndTime = 0,
           BasePrice = 32,
           MovieId = movies[i].Id,
           ScreeningRoomId = screeningRooms[i].Id
