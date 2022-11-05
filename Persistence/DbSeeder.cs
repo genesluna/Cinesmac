@@ -26,7 +26,7 @@ public static class DbSeeder
         Genre = "Comédia",
         Length = 106,
         IMDBScore = 8.1,
-        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_240/v1667405550/Cinesmac/quixeramobim.jpg",
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,h_355,w_240/v1667405550/Cinesmac/quixeramobim.jpg",
         Is3D = true,
         IsIMAX = false
       },
@@ -38,19 +38,19 @@ public static class DbSeeder
         Genre = "Ação",
         Length = 125,
         IMDBScore = 7.1,
-        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_240/v1667405550/Cinesmac/adao-negro.jpg",
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,h_355,w_240/v1667405550/Cinesmac/adao-negro.jpg",
         Is3D = true,
         IsIMAX = false
       },
       new Movie
       {
-        Title = "A Mulher Rei",
+        Title = "Mulher Rei",
         Description = "Um épico histórico inspirado em fatos reais ocorridos no Reino do Daomé, um dos estados mais poderosos da África nos séculos XVIII e XIX.",
         Director = "Gina Prince-Bythewood",
         Genre = "Drama",
         Length = 135,
         IMDBScore = 6.8,
-        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_240/v1667405549/Cinesmac/woman-king.jpg",
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,h_355,w_240/v1667405549/Cinesmac/woman-king.jpg",
         Is3D = false,
         IsIMAX = true
       },
@@ -62,19 +62,19 @@ public static class DbSeeder
         Genre = "Aventura",
         Length = 141,
         IMDBScore = 7.4,
-        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_240/v1667405550/Cinesmac/mulher-maravilha.jpg",
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,h_355,w_240/v1667405550/Cinesmac/mulher-maravilha.jpg",
         Is3D = false,
         IsIMAX = true
       },
       new Movie
       {
-        Title = "Liga da Justiça de Zack Snyder",
+        Title = "Liga da Justiça",
         Description = "Em um mundo de luto e ainda aprendendo a viver sem Superman, Bruce Wayne recruta um time de metahumanos para enfrentar um implacável senhor da guerra vindo das estrelas determinado a conquistar a Terra.",
         Director = "Zack Snyder",
         Genre = "Ação",
         Length = 242,
         IMDBScore = 8.0,
-        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_240/v1667405551/Cinesmac/liga-da-justica.jpg",
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,h_355,w_240/v1667405551/Cinesmac/liga-da-justica.jpg",
         Is3D = false,
         IsIMAX = false
       },
@@ -86,7 +86,7 @@ public static class DbSeeder
         Genre = "Ação",
         Length = 130,
         IMDBScore = 7.9,
-        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_240/v1667405549/Cinesmac/thor-ragnarok.jpg",
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,h_355,w_240/v1667405549/Cinesmac/thor-ragnarok.jpg",
         Is3D = false,
         IsIMAX = false
       },
@@ -98,7 +98,7 @@ public static class DbSeeder
         Genre = "Suspense",
         Length = 127,
         IMDBScore = 7.3,
-        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_240/v1667405552/Cinesmac/trem-bala.jpg",
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,h_355,w_240/v1667405552/Cinesmac/trem-bala.jpg",
         Is3D = false,
         IsIMAX = false
       },
@@ -110,7 +110,7 @@ public static class DbSeeder
         Genre = "Comédia",
         Length = 108,
         IMDBScore = 8.0,
-        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_240/v1667405549/Cinesmac/deadpool.jpg",
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,h_355,w_240/v1667405549/Cinesmac/deadpool.jpg",
         Is3D = false,
         IsIMAX = false
       },
@@ -122,19 +122,19 @@ public static class DbSeeder
         Genre = "Ação",
         Length = 130,
         IMDBScore = 8.4,
-        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_240/v1667405550/Cinesmac/topgun.jpg",
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,h_355,w_240/v1667405550/Cinesmac/topgun.jpg",
         Is3D = false,
         IsIMAX = false
       },
       new Movie
       {
-        Title = "Batman: O Cavaleiro das Trevas",
+        Title = "O Cavaleiro das Trevas",
         Description = "Quando a ameaça conhecida como O Coringa surge de seu passado, causa estragos e caos nas pessoas de Gotham. O Cavaleiro das Trevas deve aceitar um dos maiores testes para combater a injustiça.",
         Director = "Christopher Nolan",
         Genre = "Ação",
         Length = 152,
         IMDBScore = 9.0,
-        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_240/v1667405550/Cinesmac/cavaleiro-das-trevas.jpg",
+        ImageURL = "https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,h_355,w_240/v1667405550/Cinesmac/cavaleiro-das-trevas.jpg",
         Is3D = false,
         IsIMAX = false
       }
