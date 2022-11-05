@@ -1,4 +1,4 @@
-import { ScreeningRoom } from './screening-room';
+import { ScreeningRoom } from './ScreeningRoom';
 
 export interface Session {
   id: string;
