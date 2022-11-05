@@ -5,9 +5,7 @@ namespace Persistence;
 
 public class DataContext : DbContext
 {
-  public DataContext(DbContextOptions options) : base(options)
-  {
-  }
+  public DataContext(DbContextOptions options) : base(options) { }
 
   public DbSet<Movie> Movies { get; set; }
   public DbSet<ScreeningRoom> ScreeningRooms { get; set; }
@@ -38,8 +36,8 @@ public class DataContext : DbContext
   public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
   {
     var insertedEntries = this.ChangeTracker.Entries()
-                 .Where(x => x.State == EntityState.Added)
-                 .Select(x => x.Entity);
+        .Where(x => x.State == EntityState.Added)
+        .Select(x => x.Entity);
 
     foreach (var insertedEntry in insertedEntries)
     {
@@ -50,8 +48,8 @@ public class DataContext : DbContext
     }
 
     var modifiedEntries = this.ChangeTracker.Entries()
-           .Where(x => x.State == EntityState.Modified)
-           .Select(x => x.Entity);
+        .Where(x => x.State == EntityState.Modified)
+        .Select(x => x.Entity);
 
     foreach (var modifiedEntry in modifiedEntries)
     {
