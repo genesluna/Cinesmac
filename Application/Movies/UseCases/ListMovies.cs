@@ -27,7 +27,10 @@ public class ListMovies
 
     public async Task<Result<PagedList<MovieDto>>> Handle(Query request, CancellationToken cancellationToken)
     {
-      var query = _context.Movies.ProjectTo<MovieDto>(_mapper.ConfigurationProvider).AsQueryable();
+      var query = _context.Movies
+              .OrderBy(m => m.Title)
+              .ProjectTo<MovieDto>(_mapper.ConfigurationProvider)
+              .AsQueryable();
 
       var moviesDto = await PagedList<MovieDto>.CreateAsync(query, request.PagingParams.PageNumber,
               request.PagingParams.PageSize, cancellationToken);
