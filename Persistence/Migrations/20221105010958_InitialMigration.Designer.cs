@@ -11,7 +11,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221102163047_InitialMigration")]
+    [Migration("20221105010958_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,8 +101,8 @@ namespace Persistence.Migrations
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("EndTime")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("EndTime")
+                        .HasColumnType("INTEGER");
 
                     b.Property<Guid>("MovieId")
                         .HasColumnType("TEXT");
@@ -110,8 +110,8 @@ namespace Persistence.Migrations
                     b.Property<Guid>("ScreeningRoomId")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("StarTime")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("StarTime")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("TEXT");

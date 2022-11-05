@@ -99,8 +99,8 @@ namespace Persistence.Migrations
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("EndTime")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("EndTime")
+                        .HasColumnType("INTEGER");
 
                     b.Property<Guid>("MovieId")
                         .HasColumnType("TEXT");
@@ -108,8 +108,8 @@ namespace Persistence.Migrations
                     b.Property<Guid>("ScreeningRoomId")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("StarTime")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("StarTime")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("TEXT");

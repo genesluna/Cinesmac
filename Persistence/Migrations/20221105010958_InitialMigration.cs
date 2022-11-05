@@ -52,8 +52,8 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    StarTime = table.Column<string>(type: "TEXT", nullable: true),
-                    EndTime = table.Column<string>(type: "TEXT", nullable: true),
+                    StarTime = table.Column<int>(type: "INTEGER", nullable: false),
+                    EndTime = table.Column<int>(type: "INTEGER", nullable: false),
                     BasePrice = table.Column<decimal>(type: "TEXT", nullable: false),
                     MovieId = table.Column<Guid>(type: "TEXT", nullable: false),
                     ScreeningRoomId = table.Column<Guid>(type: "TEXT", nullable: false),
