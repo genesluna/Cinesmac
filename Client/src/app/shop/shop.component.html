@@ -1,5 +1,11 @@
-<ul>
-    <li class="list-unstyled" *ngFor="let movie of movies">
-      {{movie.title}}
-    </li>
-</ul>
+<div class="container mb-5">
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+
+    <div class="col mb-2" *ngFor="let movie of movies">
+      <app-movie-item [movie] ="movie"></app-movie-item>
+    </div>
+
+  </div>
+
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Movie } from '../shared/models/movie';
+import { Movie } from '../shared/models/Movie';
 import { ShopService } from './shop.service';
 
 @Component({
@@ -13,13 +13,13 @@ export class ShopComponent implements OnInit {
   constructor(private shopService: ShopService) {}
 
   ngOnInit(): void {
-    this.shopService.getMovies().subscribe(
-      (response) => {
-        this.movies = response;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.getMovies();
+  }
+
+  private getMovies() {
+    this.shopService.getMovies().subscribe({
+      next: (response) => (this.movies = response.body),
+      error: (error) => console.log(error),
+    });
   }
 }
