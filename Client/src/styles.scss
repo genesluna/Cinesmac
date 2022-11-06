@@ -1,10 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
-
-/* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";
-
-/* Importing Datepicker SCSS file. */
 @import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
-
-/* Importing FontAwesome SCSS file. */
 @import "node_modules/font-awesome/scss/font-awesome.scss";
+
+$base-color: #20b2aa;
+$base-color-darker: #1c948e;
+
+a {
+  color: $base-color;
+  text-decoration: none;
+}
+
+a:hover {
+  color: $base-color-darker;
+}
+
+.btn-outline-secondary{
+    color: $base-color;
+    border-color: $base-color;
+}
+
+.btn-outline-secondary:hover {
+  background-color: $base-color;
+  border-color: $base-color;
+  transition: 0.5s;
+}
+
+.btn-primary {
+  background-color: $base-color;
+  border-color: $base-color;
+}
+
+.btn-primary:hover {
+  background-color: $base-color-darker;
+  border-color: $base-color-darker;
+  transition: 0.5s;
+}
