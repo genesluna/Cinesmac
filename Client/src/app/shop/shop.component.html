@@ -1,6 +1,6 @@
 <div class="container mb-5">
 
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
 
     <div class="col mb-2" *ngFor="let movie of movies">
       <app-movie-item [movie] ="movie"></app-movie-item>
@@ -8,10 +8,12 @@
 
   </div>
 
-  <div class="d-flex justify-content-center mt-4">
+  <div class="d-flex justify-content-center mt-4" *ngIf="this.pagesCount > 1">
     <pagination class="custom-pagination"
         [boundaryLinks]="true"
-        [totalItems]="77"
+        [totalItems]="this.itemsCount"
+        [itemsPerPage]="this.queryParams.limit"
+        (pageChanged)="onPageChange($event)"
         previousText="&lsaquo;"
         nextText="&rsaquo;"
         firstText="&laquo;"

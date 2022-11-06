@@ -1,4 +1,5 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { MovieListQueryParams } from './../shared/models/MovieListQueryParams';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Movie } from '../shared/models/Movie';
@@ -11,9 +12,17 @@ export class ShopService {
 
   constructor(private http: HttpClient) {}
 
-  getMovies(): Observable<HttpResponse<Movie[]>> {
+  getMovies(
+    queryParams: MovieListQueryParams
+  ): Observable<HttpResponse<Movie[]>> {
+    let params = new HttpParams();
+
+    params = params.append('index', queryParams.index.toString());
+    params = params.append('limit', queryParams.limit.toString());
+
     return this.http.get<Movie[]>(this.baseUrl + 'movies', {
       observe: 'response',
+      params,
     });
   }
 }
