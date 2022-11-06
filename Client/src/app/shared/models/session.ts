@@ -1,6 +1,6 @@
 import { ScreeningRoom } from './ScreeningRoom';
 
-export interface Session {
+export class Session {
   id: string;
   starTime: number;
   endTime: number;

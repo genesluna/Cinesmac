@@ -1,6 +1,6 @@
 import { Session } from './Session';
 
-export interface Movie {
+export class Movie {
   id: string;
   title: string;
   description: string;
