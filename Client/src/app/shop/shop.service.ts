@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { Movie } from '../shared/models/movie';
+import { Movie } from '../shared/models/Movie';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,9 @@ export class ShopService {
 
   constructor(private http: HttpClient) {}
 
-  getMovies(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(this.baseUrl + 'movies');
+  getMovies(): Observable<HttpResponse<Movie[]>> {
+    return this.http.get<Movie[]>(this.baseUrl + 'movies', {
+      observe: 'response',
+    });
   }
 }
