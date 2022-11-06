@@ -1,0 +1,97 @@
+p {
+  color: black;
+  display: block;
+  display: -webkit-box;
+  width: auto;
+  font-size: 20dp;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+img {
+  transition: filter .7s ease-in-out;
+  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%);
+}
+
+img:hover {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+.card {
+  transition: transform .35s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+/* ribbon common */
+.ribbon {
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.ribbon::before,
+.ribbon::after {
+  position: absolute;
+  z-index: -1;
+  content: '';
+  display: block;
+  border: 5px solid rgb(28, 148, 142);
+}
+
+.ribbon span {
+  position: absolute;
+  display: block;
+  width: 225px;
+  padding: 15px 0;
+  background-color: lightseagreen;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+  color: #fff;
+  font: 700 15px/1 'Lato', sans-serif;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* ribbon top left*/
+.ribbon-top-left {
+  top: 0px;
+  left: 0px;
+}
+
+.ribbon-top-left::before,
+.ribbon-top-left::after {
+  border-top-color: transparent;
+  border-left-color: transparent;
+}
+
+.ribbon-top-left span {
+  right: -25px;
+  top: 10px;
+  transform: rotate(-45deg);
+}
+
+/* ribbon top right*/
+.ribbon-top-right {
+  top: 0px;
+  right: 0px;
+}
+
+.ribbon-top-right::before,
+.ribbon-top-right::after {
+  border-top-color: transparent;
+  border-right-color: transparent;
+}
+
+.ribbon-top-right span {
+  left: -25px;
+  top: 10px;
+  transform: rotate(45deg);
+}
