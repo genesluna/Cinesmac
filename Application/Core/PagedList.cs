@@ -4,25 +4,25 @@ namespace Application.Core;
 
 public class PagedList<T> : List<T>
 {
-  public PagedList(IEnumerable<T> items, int count, int pageNumber, int pageSize)
+  public PagedList(IEnumerable<T> items, int count, int index, int limit)
   {
     TotalCount = count;
-    CurrentPage = pageNumber;
-    PageSize = pageSize;
-    TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+    Index = index;
+    Limit = limit;
+    PageCount = (int)Math.Ceiling(count / (double)limit);
     AddRange(items);
   }
 
-  public int CurrentPage { get; set; }
-  public int TotalPages { get; set; }
-  public int PageSize { get; set; }
+  public int Index { get; set; }
+  public int Limit { get; set; }
+  public int PageCount { get; set; }
   public int TotalCount { get; set; }
 
-  public static async Task<PagedList<T>> CreateAsync(IQueryable<T> source, int pageNumber, int pageSize, CancellationToken cancellationToken)
+  public static async Task<PagedList<T>> CreateAsync(IQueryable<T> source, int index, int limit, CancellationToken cancellationToken)
   {
     var count = await source.CountAsync();
-    var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync(cancellationToken);
+    var items = await source.Skip((index - 1) * limit).Take(limit).ToListAsync(cancellationToken);
 
-    return new PagedList<T>(items, count, pageNumber, pageSize);
+    return new PagedList<T>(items, count, index, limit);
   }
 }

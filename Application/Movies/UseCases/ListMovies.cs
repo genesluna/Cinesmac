@@ -32,8 +32,8 @@ public class ListMovies
               .ProjectTo<MovieDto>(_mapper.ConfigurationProvider)
               .AsQueryable();
 
-      var moviesDto = await PagedList<MovieDto>.CreateAsync(query, request.PagingParams.PageNumber,
-              request.PagingParams.PageSize, cancellationToken);
+      var moviesDto = await PagedList<MovieDto>.CreateAsync(query, request.PagingParams.Index,
+              request.PagingParams.Limit, cancellationToken);
 
       return Result<PagedList<MovieDto>>.Success(moviesDto);
     }
