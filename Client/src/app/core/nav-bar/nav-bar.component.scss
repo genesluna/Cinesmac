@@ -10,3 +10,12 @@
   top: -12px;
   right: 32px;
 }
+
+a {
+  color: black;
+}
+
+a:hover{
+  color: #20b2aa;
+  transition: 0.5s;
+}
