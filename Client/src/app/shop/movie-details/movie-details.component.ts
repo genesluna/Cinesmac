@@ -59,16 +59,34 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   setSessionPrices(sessions: Session[]): void {
+    let onlyVip = this.movie.is3D || this.movie.isIMAX;
+
     sessions.forEach((session) =>
       this.sessionPrices.push({
         sessionId: session.id,
         ticket: [
-          { id: 0, ticketType: 'Inteira', ticketPrice: session.basePrice },
-          { id: 1, ticketType: 'Meia', ticketPrice: session.halfPrice },
-          { id: 2, ticketType: 'Vip', ticketPrice: session.vipPrice },
+          {
+            id: 0,
+            ticketType: 'Inteira',
+            ticketPrice: session.basePrice,
+            disabled: onlyVip,
+          },
+          {
+            id: 1,
+            ticketType: 'Meia',
+            ticketPrice: session.halfPrice,
+            disabled: onlyVip,
+          },
+          {
+            id: 2,
+            ticketType: 'Vip',
+            ticketPrice: session.vipPrice,
+            disabled: false,
+          },
         ],
       })
     );
+    console.log(this.sessionPrices);
   }
 
   addTicketToBasket(): void {

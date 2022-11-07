@@ -43,7 +43,7 @@
       <h6 class="my-3">Escolha o tipo de ingresso:</h6>
       <ul class="list-group list-group-horizontal">
         <li class="list-group-item text-center text-selection-none" *ngFor="let ticket of selectedSessionPrices['ticket']"
-          [class.active]="ticket.id === this.selectedTicketTypeId" [value]="ticket.id"
+          [class.active]="ticket.id === this.selectedTicketTypeId" [class.disabled] = "ticket.disabled" [value]="ticket.id"
           (click)="onTicketTypeSelected(ticket.id)">
           {{ticket.ticketType}}
         </li>
