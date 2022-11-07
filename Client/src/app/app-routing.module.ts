@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MovieDetailsComponent } from './shop/movie-details/movie-details.component';
-import { ShopComponent } from './shop/shop.component';
 
 const routes: Routes = [
-  { path: '', component: ShopComponent },
-  { path: 'shop/:id', component: MovieDetailsComponent },
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+  {
+    path: 'shop',
+    loadChildren: () =>
+      import('./shop/shop.module').then((mod) => mod.ShopModule),
+  },
+  {
+    path: 'basket',
+    loadChildren: () =>
+      import('./basket/basket.module').then((mod) => mod.BasketModule),
+  },
+  { path: '**', redirectTo: 'shop', pathMatch: 'full' },
 ];
 
 @NgModule({
