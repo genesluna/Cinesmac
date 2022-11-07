@@ -8,7 +8,7 @@ import { Movie } from '../shared/models/Movie';
   providedIn: 'root',
 })
 export class ShopService {
-  baseUrl = 'https://localhost:5001/api/v1/';
+  baseUrl = 'https://localhost:5001/api/v1/movies/';
 
   constructor(private http: HttpClient) {}
 
@@ -20,9 +20,13 @@ export class ShopService {
     params = params.append('index', queryParams.index.toString());
     params = params.append('limit', queryParams.limit.toString());
 
-    return this.http.get<Movie[]>(this.baseUrl + 'movies', {
+    return this.http.get<Movie[]>(this.baseUrl, {
       observe: 'response',
       params,
     });
+  }
+
+  getMovie(id: string): Observable<Movie> {
+    return this.http.get<Movie>(this.baseUrl + id);
   }
 }
