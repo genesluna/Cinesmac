@@ -3,12 +3,13 @@ import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Movie } from '../shared/models/Movie';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShopService {
-  baseUrl = 'https://localhost:5001/api/v1/movies/';
+  baseUrl = environment.apiUrl + 'movies/';
 
   constructor(private http: HttpClient) {}
 
