@@ -8,6 +8,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using StackExchange.Redis;
 
 namespace API.Extensions;
 
@@ -50,9 +51,13 @@ public static class ApplicationServiceExtensions
       });
     });
 
-    services.AddDbContext<DataContext>(opt =>
+    services.AddDbContext<DataContext>(opt => opt.UseSqlite(config.GetConnectionString("DefaultConnection")));
+
+    services.AddSingleton<IConnectionMultiplexer>(cfg =>
     {
-      opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
+      var configuration = ConfigurationOptions.Parse(config.GetConnectionString("Redis"), true);
+
+      return ConnectionMultiplexer.Connect(configuration);
     });
 
     services.AddMediatR(typeof(ListMovies.Handler).Assembly);
