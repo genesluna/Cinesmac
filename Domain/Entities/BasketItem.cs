@@ -5,7 +5,7 @@ namespace Domain.Entities;
 public class BasketItem
 {
   public string Id { get; set; }
-  public int SessionTime { get; set; }
+  public int SessionStartTime { get; set; }
   public TicketType TicketType { get; set; }
   public string MovieTitle { get; set; }
   public string ScreeningRoomName { get; set; }
