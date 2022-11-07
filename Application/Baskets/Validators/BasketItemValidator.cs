@@ -9,11 +9,11 @@ public class BasketItemValidator : AbstractValidator<BasketItem>
   {
     RuleFor(x => x.Id).NotEmpty();
     RuleFor(x => x.SessionStartTime).NotEmpty();
-    RuleFor(x => x.TicketType).NotEmpty();
+    RuleFor(x => x.TicketType).NotNull();
     RuleFor(x => x.MovieTitle).NotEmpty();
     RuleFor(x => x.ScreeningRoomName).NotEmpty();
     RuleFor(x => x.Price).NotEmpty();
-    RuleFor(x => x.Quantity).NotEmpty();
+    RuleFor(x => x.Quantity).NotEmpty().GreaterThan(0);
     RuleFor(x => x.ImageUrl).NotEmpty();
   }
 }
