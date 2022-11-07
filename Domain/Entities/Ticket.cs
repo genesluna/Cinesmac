@@ -1,9 +1,6 @@
-﻿namespace Domain.Entities;
+﻿using Domain.Enums;
 
-public enum TicketType
-{
-  Full, Half, Vip
-}
+namespace Domain.Entities;
 
 public class Ticket : BaseEntity
 {
