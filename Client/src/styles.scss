@@ -8,30 +8,30 @@ $base-color-darker: #1c948e;
 a {
   color: $base-color;
   text-decoration: none;
-}
 
-a:hover {
-  color: $base-color-darker;
+  &:hover{
+    color: $base-color-darker;
+  }
 }
 
 .btn-outline-secondary{
     color: $base-color;
     border-color: $base-color;
-}
 
-.btn-outline-secondary:hover {
-  background-color: $base-color;
-  border-color: $base-color;
-  transition: 0.5s;
+    &:hover {
+      background-color: $base-color;
+      border-color: $base-color;
+      transition: 0.5s;
+    }
 }
 
 .btn-primary {
   background-color: $base-color;
   border-color: $base-color;
-}
 
-.btn-primary:hover {
-  background-color: $base-color-darker;
-  border-color: $base-color-darker;
-  transition: 0.5s;
+  &:hover{
+    background-color: $base-color-darker;
+    border-color: $base-color-darker;
+    transition: 0.5s;
+  }
 }
