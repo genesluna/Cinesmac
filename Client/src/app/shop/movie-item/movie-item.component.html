@@ -1,18 +1,17 @@
+<a class="card h-100 shadow-sm" routerLink="/shop/{{ movie.id }}">
+  <img src="{{ movie.imageURL }}" alt="{{ movie.title }}" class="img-fluid" />
 
-<a class="card h-100 shadow-sm" routerLink="/shop/{{movie.id}}">
-
-  <img src="{{movie.imageURL}}" alt="{{movie.title}}" class="img-fluid">
-
-  <div class="ribbon ribbon-top-right" *ngIf="movie.isIMAX"><span>IMAX</span></div>
+  <div class="ribbon ribbon-top-right" *ngIf="movie.isIMAX">
+    <span>IMAX</span>
+  </div>
   <div class="ribbon ribbon-top-right" *ngIf="movie.is3D"><span>3D</span></div>
 
   <div class="card-body d-flex flex-column">
     <a class="mb-2">
-      <h6 class="text-uppercase">{{movie.title}}</h6>
+      <h6 class="text-uppercase">{{ movie.title }}</h6>
     </a>
     <p class="mt-auto">
-      {{movie.description}}
+      {{ movie.description }}
     </p>
   </div>
-
 </a>

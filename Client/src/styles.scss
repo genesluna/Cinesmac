@@ -15,35 +15,34 @@ a {
   color: $base-color;
   text-decoration: none;
 
-  &:hover{
+  &:hover {
     color: $base-color-hover;
   }
 }
 
-.btn-outline-secondary{
-    color: $base-color;
-    border-color: $base-color;
+.btn-outline-secondary {
+  color: $base-color;
+  border-color: $base-color;
 
-    &:hover {
-      background-color: $base-color;
-      border-color: $base-color;
-      transition: 0.5s;
-    }
+  &:hover {
+    background-color: $base-color;
+    border-color: $base-color;
+    transition: 0.5s;
+  }
 }
 
 .btn-primary {
   background-color: $base-color;
   border-color: $base-color;
 
-  &:hover{
+  &:hover {
     background-color: $base-color-hover;
     border-color: $base-color-hover;
     transition: 0.5s;
   }
 
-  &:active{
-    &:active{
-
+  &:active {
+    &:active {
       background-color: $base-color-active;
       border-color: $base-color-active;
     }

@@ -3,26 +3,25 @@
     <h4>Não há ingressos em seu carrinho 😐</h4>
   </div>
 
-  <div *ngIf="(basket$ | async) as basket" class="row">
-
+  <div *ngIf="basket$ | async as basket" class="row">
     <div class="table-responsive">
       <table class="table table-hover">
         <thead class="table-dark-light">
           <tr>
             <th class="align-middle" scope="col">
-              <div class=" text-uppercase py-2 px-3">Filme</div>
+              <div class="text-uppercase py-2 px-3">Filme</div>
             </th>
             <th class="align-middle text-center" scope="col">
-              <div class=" text-uppercase py-2">Preço</div>
+              <div class="text-uppercase py-2">Preço</div>
             </th>
             <th class="align-middle text-center" scope="col">
-              <div class=" text-uppercase py-2">Quantidade</div>
+              <div class="text-uppercase py-2">Quantidade</div>
             </th>
             <th class="align-middle text-center" scope="col">
-              <div class=" text-uppercase py-2">Total</div>
+              <div class="text-uppercase py-2">Total</div>
             </th>
             <th class="align-middle text-center" scope="col">
-              <div class=" text-uppercase py-2">Remover</div>
+              <div class="text-uppercase py-2">Remover</div>
             </th>
           </tr>
         </thead>
@@ -30,30 +29,46 @@
           <tr *ngFor="let item of basket.items">
             <td class="align-middle px-3 py-2">
               <div class="p-2">
-                <img src="{{item.imageUrl}}" alt="{{item.movieTitle}}" class="img-fluid img-max-h-50">
+                <img
+                  src="{{ item.imageUrl }}"
+                  alt="{{ item.movieTitle }}"
+                  class="img-fluid img-max-h-50"
+                />
                 <div class="ms-3 d-inline-block align-middle">
                   <h5 class="mb-0">
-                    <a>{{item.movieTitle}}</a>
+                    <a>{{ item.movieTitle }}</a>
                   </h5>
                   <span class="text-muted d-block">
-                    <em>Sessão: {{item.sessionStartTime}}hs - Ingresso: {{getTicketTypeName(item.ticketType)}}</em>
+                    <em
+                      >Sessão: {{ item.sessionStartTime }}hs - Ingresso:
+                      {{ getTicketTypeName(item.ticketType) }}</em
+                    >
                   </span>
                 </div>
               </div>
             </td>
             <td class="align-middle text-center py-2 fw-bold">
-              {{item.price | currency:'BRL'}}
+              {{ item.price | currency: "BRL" }}
             </td>
             <td class="align-middle text-center text-selection-none py-2">
-              <i class="fa fa-minus-circle increment" (click)="decrementItemQuantity(item)"></i>
-              <span class="mx-3 increment-span">{{item.quantity}}</span>
-              <i class="fa fa-plus-circle increment" (click)="incrementItemQuantity(item)"></i>
+              <i
+                class="fa fa-minus-circle increment"
+                (click)="decrementItemQuantity(item)"
+              ></i>
+              <span class="mx-3 increment-span">{{ item.quantity }}</span>
+              <i
+                class="fa fa-plus-circle increment"
+                (click)="incrementItemQuantity(item)"
+              ></i>
             </td>
             <td class="align-middle text-center py-2 fw-bold">
-              {{(item.price * item.quantity) | currency:'BRL'}}
+              {{ item.price * item.quantity | currency: "BRL" }}
             </td>
             <td class="align-middle text-center py-2">
-              <a (click)="removeItemFromBasket(item)" class="text-danger trash-can">
+              <a
+                (click)="removeItemFromBasket(item)"
+                class="text-danger trash-can"
+              >
                 <i class="fa fa-trash"></i>
               </a>
             </td>
@@ -64,7 +79,9 @@
             <td></td>
             <td></td>
             <td class="align-middle text-center py-2 fw-bold">Total</td>
-            <td class="align-middle text-center py-2 fw-bold">{{basket.total | currency:'BRL'}}</td>
+            <td class="align-middle text-center py-2 fw-bold">
+              {{ basket.total | currency: "BRL" }}
+            </td>
             <td></td>
           </tr>
         </tfoot>
@@ -76,7 +93,5 @@
         Finalizar a compra
       </a>
     </div>
-
   </div>
 </div>
-

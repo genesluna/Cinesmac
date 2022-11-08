@@ -11,7 +11,7 @@ p {
 }
 
 img {
-  transition: filter .5s ease-in-out;
+  transition: filter 0.5s ease-in-out;
   -webkit-filter: grayscale(0%);
   filter: grayscale(0%);
 }
@@ -22,7 +22,7 @@ img:hover {
 }
 
 .card {
-  transition: transform .35s;
+  transition: transform 0.35s;
 }
 
 .card:hover {
@@ -41,7 +41,7 @@ img:hover {
 .ribbon::after {
   position: absolute;
   z-index: -1;
-  content: '';
+  content: "";
   display: block;
   border: 5px solid rgb(28, 148, 142);
 }
@@ -52,10 +52,10 @@ img:hover {
   width: 225px;
   padding: 15px 0;
   background-color: lightseagreen;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   color: #fff;
-  font: 700 15px/1 'Lato', sans-serif;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+  font: 700 15px/1 "Lato", sans-serif;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   text-transform: uppercase;
   text-align: center;
 }

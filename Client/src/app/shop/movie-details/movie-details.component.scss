@@ -2,7 +2,7 @@ li {
   color: lightseagreen;
   border-color: rgba(32, 178, 171, 0.404);
 
-  &.active{
+  &.active {
     background-color: lightseagreen;
     border-color: lightseagreen;
     &:hover {
@@ -15,7 +15,7 @@ li {
   }
 }
 
-.text-selection-none{
+.text-selection-none {
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
