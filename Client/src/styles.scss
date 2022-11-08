@@ -3,7 +3,8 @@
 @import "node_modules/font-awesome/scss/font-awesome.scss";
 
 $base-color: #20b2aa;
-$base-color-darker: #1c948e;
+$base-color-hover: #1c948e;
+$base-color-active: #146662;
 
 body {
   background-color: white;
@@ -14,7 +15,7 @@ a {
   text-decoration: none;
 
   &:hover{
-    color: $base-color-darker;
+    color: $base-color-hover;
   }
 }
 
@@ -34,8 +35,16 @@ a {
   border-color: $base-color;
 
   &:hover{
-    background-color: $base-color-darker;
-    border-color: $base-color-darker;
+    background-color: $base-color-hover;
+    border-color: $base-color-hover;
     transition: 0.5s;
+  }
+
+  &:active{
+    &:active{
+
+      background-color: $base-color-active;
+      border-color: $base-color-active;
+    }
   }
 }
