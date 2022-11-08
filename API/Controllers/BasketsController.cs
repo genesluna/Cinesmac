@@ -13,13 +13,13 @@ public class BasketsController : BaseAPIController
   }
 
   [HttpPost]
-  public async Task<IActionResult> CreateBasket(Basket basket, CancellationToken cancellationToken)
+  public async Task<ActionResult<Basket>> CreateBasket(Basket basket, CancellationToken cancellationToken)
   {
     return HandleResult(await Mediator.Send(new CreateBasket.Command { Basket = basket }, cancellationToken));
   }
 
   [HttpPut]
-  public async Task<IActionResult> EditBasket(Basket basket, CancellationToken cancellationToken)
+  public async Task<ActionResult<Basket>> EditBasket(Basket basket, CancellationToken cancellationToken)
   {
     return HandleResult(await Mediator.Send(new EditBasket.Command { Basket = basket }, cancellationToken));
   }
