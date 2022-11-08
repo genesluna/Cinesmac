@@ -3,5 +3,6 @@ import { BasketItem } from './BasketItem';
 
 export class Basket {
   id: string = uuidv4();
+  total: number = 0;
   items: BasketItem[] = [];
 }
