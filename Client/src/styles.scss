@@ -5,6 +5,10 @@
 $base-color: #20b2aa;
 $base-color-darker: #1c948e;
 
+body {
+  background-color: white;
+}
+
 a {
   color: $base-color;
   text-decoration: none;
