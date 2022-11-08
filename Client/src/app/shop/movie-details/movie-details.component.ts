@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BasketService } from 'src/app/basket/basket.service';
+import { BasketItem } from 'src/app/shared/models/BasketItem';
 import { Movie } from 'src/app/shared/models/Movie';
 import { Session } from 'src/app/shared/models/Session';
 import { ShopService } from '../shop.service';
@@ -11,16 +13,15 @@ import { ShopService } from '../shop.service';
 })
 export class MovieDetailsComponent implements OnInit {
   movie: Movie;
-  selectedSessionId: string;
-  selectedTicketTypeId: number;
-  selectedPrice: number;
+  basketItem: BasketItem = new BasketItem();
+  addedToBasket: boolean = false;
   selectedSessionPrices = {};
   sessionPrices = [];
-  ticketQuantity = 1;
   ticketsAvailable = 15;
 
   constructor(
     private shopService: ShopService,
+    private basketService: BasketService,
     private activatedRoute: ActivatedRoute
   ) {}
 
@@ -36,21 +37,30 @@ export class MovieDetailsComponent implements OnInit {
         this.movie = response;
         this.sortSessions(this.movie.sessions);
         this.setSessionPrices(this.movie.sessions);
+        this.basketItem.movieTitle = this.movie.title;
+        this.basketItem.imageUrl = this.movie.imageURL;
       },
       error: (error) => console.log(error),
     });
   }
 
   onSessionSelected(sessionId: string): void {
-    this.selectedSessionId = sessionId;
+    if (this.addedToBasket) return;
+
+    this.basketItem.id = sessionId;
     this.selectedSessionPrices = this.sessionPrices.find(
-      ({ sessionId }) => sessionId === this.selectedSessionId
+      ({ sessionId }) => sessionId === this.basketItem.id
     );
+    const session = this.movie.sessions.find((s) => s.id === sessionId);
+    this.basketItem.sessionStartTime = session.starTime;
+    this.basketItem.screeningRoomName = session.screeningRoom.name;
   }
 
   onTicketTypeSelected(ticketId: number) {
-    this.selectedTicketTypeId = ticketId;
-    this.selectedPrice =
+    if (this.addedToBasket) return;
+
+    this.basketItem.ticketType = ticketId;
+    this.basketItem.price =
       this.selectedSessionPrices['ticket'][ticketId].ticketPrice;
   }
 
@@ -86,23 +96,25 @@ export class MovieDetailsComponent implements OnInit {
         ],
       })
     );
-    console.log(this.sessionPrices);
   }
 
   addTicketToBasket(): void {
-    // TODO
-    console.log('Not implemented, yet! :/');
+    this.basketService.addItemToBasket(this.basketItem);
+    this.addedToBasket = true;
   }
 
   incrementTicketQuantity(): void {
-    if (this.ticketQuantity < this.ticketsAvailable) {
-      this.ticketQuantity++;
+    if (this.addedToBasket) return;
+
+    if (this.basketItem.quantity < this.ticketsAvailable) {
+      this.basketItem.quantity++;
     }
   }
 
   decrementTicketQuantity(): void {
-    if (this.ticketQuantity > 1) {
-      this.ticketQuantity--;
+    if (this.addedToBasket) return;
+    if (this.basketItem.quantity > 1) {
+      this.basketItem.quantity--;
     }
   }
 }
