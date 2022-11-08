@@ -3,6 +3,7 @@ namespace Application.Core;
 public enum ErrorType
 {
   NotFound,
+  NoContent,
   SaveChangesError
 }
 

@@ -26,7 +26,7 @@ public class DetailBasket
       var basket = await _db.StringGetAsync(request.Id);
 
       if (basket.IsNullOrEmpty)
-        return Result<Basket>.Failure(ErrorType.NotFound, "Basket not found");
+        return Result<Basket>.Failure(ErrorType.NoContent, "Basket not found");
 
       return Result<Basket>.Success(JsonSerializer.Deserialize<Basket>(basket));
     }

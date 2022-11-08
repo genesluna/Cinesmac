@@ -41,6 +41,7 @@ public abstract class BaseAPIController : ControllerBase
     {
       ErrorType.NotFound => NotFound(new ApiResponse((int)HttpStatusCode.NotFound, errorMessage)),
       ErrorType.SaveChangesError => BadRequest(new ApiResponse((int)HttpStatusCode.BadRequest, errorMessage)),
+      ErrorType.NoContent => NoContent(),
       _ => BadRequest()
     };
   }
