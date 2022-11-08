@@ -8,7 +8,7 @@ public class BasketValidator : AbstractValidator<Basket>
   public BasketValidator()
   {
     RuleFor(x => x.Id).NotEmpty();
-    RuleFor(x => x.Total).NotNull();
+    RuleFor(x => x.Total).NotEmpty();
     RuleFor(x => x.Items).NotEmpty();
   }
 }
