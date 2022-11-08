@@ -1,0 +1,29 @@
+.text-selection-none {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.increment {
+  color: lightseagreen;
+  cursor: pointer;
+  font-size: 1.1em;
+}
+
+.img-max-h-50{
+  max-height: 50px;
+}
+
+.trash-can {
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+.increment-span {
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.table-dark-light{
+  background-color: rgb(242, 242, 242);
+}
