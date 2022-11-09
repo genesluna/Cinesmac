@@ -4,7 +4,8 @@ public enum ErrorType
 {
   NotFound,
   NoContent,
-  SaveChangesError
+  SaveChangesError,
+  Unauthorized
 }
 
 public class Result<T>
