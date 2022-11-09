@@ -2,6 +2,9 @@ using Persistence;
 using Microsoft.EntityFrameworkCore;
 using API.Extensions;
 using API.Middleware;
+using Persistence.Identity;
+using Microsoft.AspNetCore.Identity;
+using Domain.Entities.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,8 +18,13 @@ using var scope = app.Services.CreateScope();
 try
 {
   var context = scope.ServiceProvider.GetRequiredService<DataContext>();
+  var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+  var identityContext = scope.ServiceProvider.GetRequiredService<IdentityDataContext>();
+
   await context.Database.MigrateAsync();
-  await DbSeeder.Seed(context);
+  await identityContext.Database.MigrateAsync();
+  await DbSeeder.SeedAsync(context);
+  await IdentityDbSeed.SeedUsersAsync(userManager);
 }
 catch (Exception ex)
 {

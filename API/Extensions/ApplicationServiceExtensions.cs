@@ -2,12 +2,15 @@ using API.Errors;
 using Application.Core;
 using Application.Movies.UseCases;
 using Application.Movies.Validators;
+using Domain.Entities.Identity;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using Persistence.Identity;
 using StackExchange.Redis;
 
 namespace API.Extensions;
@@ -52,6 +55,14 @@ public static class ApplicationServiceExtensions
     });
 
     services.AddDbContext<DataContext>(opt => opt.UseSqlite(config.GetConnectionString("DefaultConnection")));
+    services.AddDbContext<IdentityDataContext>(opt => opt.UseSqlite(config.GetConnectionString("IdentityConnection")));
+
+    var builder = services.AddIdentityCore<User>();
+    builder = new IdentityBuilder(builder.UserType, builder.Services);
+    builder.AddEntityFrameworkStores<IdentityDataContext>();
+    builder.AddSignInManager<SignInManager<User>>();
+
+    services.AddAuthentication();
 
     services.AddSingleton<IConnectionMultiplexer>(cfg =>
     {
