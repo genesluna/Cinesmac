@@ -5,7 +5,7 @@ namespace Persistence;
 
 public class DataContext : DbContext
 {
-  public DataContext(DbContextOptions options) : base(options) { }
+  public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
   public DbSet<Movie> Movies { get; set; }
   public DbSet<ScreeningRoom> ScreeningRooms { get; set; }
