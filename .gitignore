@@ -5,6 +5,7 @@
 
 # Sqlite
 cinesmac.db*
+cinesmac-identity.db*
 
 # User-specific files
 *.rsuser
