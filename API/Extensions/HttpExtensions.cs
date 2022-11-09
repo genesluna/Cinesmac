@@ -2,7 +2,7 @@ namespace API.Extensions;
 
 public static class HttpExtensions
 {
-  public static void AddPaginationsHeaders(this HttpResponse response, int index,
+  public static void AddPaginationHeaders(this HttpResponse response, int index,
         int limit, int pageCount, int totalCount)
   {
     response.Headers.Add("Pagination-Index", index.ToString());

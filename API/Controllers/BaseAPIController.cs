@@ -27,7 +27,7 @@ public abstract class BaseAPIController : ControllerBase
   {
     if (result.IsSuccess)
     {
-      Response.AddPaginationsHeaders(result.Value.Index, result.Value.Limit,
+      Response.AddPaginationHeaders(result.Value.Index, result.Value.Limit,
           result.Value.PageCount, result.Value.TotalCount);
       return Ok(result.Value);
     }
