@@ -5,7 +5,7 @@ namespace Persistence;
 
 public static class DbSeeder
 {
-  public static async Task Seed(DataContext context)
+  public static async Task SeedAsync(DataContext context)
   {
     await SeedMovies(context);
     await SeedScreeningRooms(context);
