@@ -39,9 +39,12 @@ public abstract class BaseAPIController : ControllerBase
   {
     return errorType switch
     {
-      ErrorType.NotFound => NotFound(new ApiResponse((int)HttpStatusCode.NotFound, errorMessage)),
-      ErrorType.SaveChangesError => BadRequest(new ApiResponse((int)HttpStatusCode.BadRequest, errorMessage)),
-      ErrorType.Unauthorized => Unauthorized(new ApiResponse((int)HttpStatusCode.Unauthorized, errorMessage)),
+      ErrorType.NotFound => NotFound(new ApiResponse((int)HttpStatusCode.NotFound,
+        errorMessage)),
+      ErrorType.SaveChangesError => BadRequest(new ApiResponse((int)HttpStatusCode.BadRequest,
+         errorMessage)),
+      ErrorType.Unauthorized => Unauthorized(new ApiResponse((int)HttpStatusCode.Unauthorized,
+        errorMessage)),
       ErrorType.NoContent => NoContent(),
       _ => BadRequest()
     };

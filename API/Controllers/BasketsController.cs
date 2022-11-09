@@ -7,27 +7,27 @@ namespace API.Controllers;
 public class BasketsController : BaseAPIController
 {
   [HttpGet("{id}")]
-  public async Task<ActionResult<Basket>> GetBasket(string id, CancellationToken cancellationToken)
+  public async Task<ActionResult<Basket>> GetBasket(string id)
   {
-    return HandleResult(await Mediator.Send(new DetailBasket.Query { Id = id }, cancellationToken));
+    return HandleResult(await Mediator.Send(new DetailBasket.Query { Id = id }));
   }
 
   [HttpPost]
-  public async Task<ActionResult<Basket>> CreateBasket(Basket basket, CancellationToken cancellationToken)
+  public async Task<ActionResult<Basket>> CreateBasket(Basket basket)
   {
-    return HandleResult(await Mediator.Send(new CreateBasket.Command { Basket = basket }, cancellationToken));
+    return HandleResult(await Mediator.Send(new CreateBasket.Command { Basket = basket }));
   }
 
   [HttpPut]
-  public async Task<ActionResult<Basket>> EditBasket(Basket basket, CancellationToken cancellationToken)
+  public async Task<ActionResult<Basket>> EditBasket(Basket basket)
   {
-    return HandleResult(await Mediator.Send(new EditBasket.Command { Basket = basket }, cancellationToken));
+    return HandleResult(await Mediator.Send(new EditBasket.Command { Basket = basket }));
   }
 
   [HttpDelete("{id}")]
-  public async Task<IActionResult> DeleteBasket(string id, CancellationToken cancellationToken)
+  public async Task<IActionResult> DeleteBasket(string id)
   {
-    return HandleResult(await Mediator.Send(new DeleteBasket.Command { Id = id }, cancellationToken));
+    return HandleResult(await Mediator.Send(new DeleteBasket.Command { Id = id }));
   }
 
 }
