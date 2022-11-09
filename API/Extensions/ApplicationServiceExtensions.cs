@@ -2,11 +2,11 @@ using API.Errors;
 using Application.Core;
 using Application.Movies.UseCases;
 using Application.Movies.Validators;
-using Domain.Entities.Identity;
+using Domain.Entities.Identity.Interfaces;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Infrastructure.Services;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -23,7 +23,6 @@ public static class ApplicationServiceExtensions
     services.AddEndpointsApiExplorer();
     services.AddFluentValidationAutoValidation();
     services.AddValidatorsFromAssemblyContaining<MovieCreateValidator>();
-    services.AddSwaggerGen();
 
     services.Configure<ApiBehaviorOptions>(opt =>
     {
@@ -57,13 +56,6 @@ public static class ApplicationServiceExtensions
     services.AddDbContext<DataContext>(opt => opt.UseSqlite(config.GetConnectionString("DefaultConnection")));
     services.AddDbContext<IdentityDataContext>(opt => opt.UseSqlite(config.GetConnectionString("IdentityConnection")));
 
-    var builder = services.AddIdentityCore<User>();
-    builder = new IdentityBuilder(builder.UserType, builder.Services);
-    builder.AddEntityFrameworkStores<IdentityDataContext>();
-    builder.AddSignInManager<SignInManager<User>>();
-
-    services.AddAuthentication();
-
     services.AddSingleton<IConnectionMultiplexer>(cfg =>
     {
       var configuration = ConfigurationOptions.Parse(config.GetConnectionString("Redis"), true);
@@ -72,7 +64,10 @@ public static class ApplicationServiceExtensions
     });
 
     services.AddMediatR(typeof(ListMovies.Handler).Assembly);
+
     services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+
+    services.AddScoped<ITokenService, TokenService>();
 
     return services;
   }
