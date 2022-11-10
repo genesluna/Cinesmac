@@ -1,108 +1,110 @@
-<div class="row g-5 mb-5" *ngIf="movie">
-  <div class="col-md-1"></div>
+<div class="container mt-3">
+  <div class="row g-5 mb-5" *ngIf="movie">
+    <div class="col-md-1"></div>
 
-  <div class="col-md-5">
-    <img
-      src="{{ movie.imageURL }}"
-      alt="{{ movie.title }}"
-      class="img-fluid w-100"
-    />
-  </div>
-
-  <div class="col-md-5">
-    <h3>{{ movie.title }}</h3>
-    <div class="mt-2">
-      <span class="fw-semibold">IMDB:</span>
-      <span class="ms-1">{{ movie.imdbScore }}</span>
-    </div>
-    <div class="mt-2">
-      <span class="fw-semibold">Diretor:</span>
-      <span class="ms-1">{{ movie.director }}</span>
-    </div>
-    <div class="mt-2">
-      <span class="fw-semibold">Gênero:</span>
-      <span class="ms-1">{{ movie.genre }}</span>
-    </div>
-    <div class="mt-2">
-      <span class="fw-semibold">Duração:</span>
-      <span class="ms-1">{{ movie.length }} minutos</span>
-    </div>
-    <div class="mt-2">
-      <span class="fw-semibold">Descrição:</span>
-      <p class="mt-2">{{ movie.description }}</p>
+    <div class="col-md-5">
+      <img
+        src="{{ movie.imageURL }}"
+        alt="{{ movie.title }}"
+        class="img-fluid w-100"
+      />
     </div>
 
-    <h6 class="my-3">Escolha a sessão:</h6>
-    <ul class="list-group list-group-horizontal">
-      <li
-        class="list-group-item text-center text-selection-none"
-        *ngFor="let session of movie.sessions"
-        [class.active]="session.id === basketItem.id"
-        [value]="session.id"
-        (click)="onSessionSelected(session.id)"
-      >
-        {{ session.starTime }}hs
-      </li>
-    </ul>
+    <div class="col-md-5">
+      <h3>{{ movie.title }}</h3>
+      <div class="mt-2">
+        <span class="fw-semibold">IMDB:</span>
+        <span class="ms-1">{{ movie.imdbScore }}</span>
+      </div>
+      <div class="mt-2">
+        <span class="fw-semibold">Diretor:</span>
+        <span class="ms-1">{{ movie.director }}</span>
+      </div>
+      <div class="mt-2">
+        <span class="fw-semibold">Gênero:</span>
+        <span class="ms-1">{{ movie.genre }}</span>
+      </div>
+      <div class="mt-2">
+        <span class="fw-semibold">Duração:</span>
+        <span class="ms-1">{{ movie.length }} minutos</span>
+      </div>
+      <div class="mt-2">
+        <span class="fw-semibold">Descrição:</span>
+        <p class="mt-2">{{ movie.description }}</p>
+      </div>
 
-    <div *ngIf="basketItem.id">
-      <h6 class="my-3">Escolha o tipo de ingresso:</h6>
+      <h6 class="my-3">Escolha a sessão:</h6>
       <ul class="list-group list-group-horizontal">
         <li
           class="list-group-item text-center text-selection-none"
-          *ngFor="let ticket of selectedSessionPrices['ticket']"
-          [class.active]="ticket.id === basketItem.ticketType"
-          [class.disabled]="ticket.disabled"
-          [value]="ticket.id"
-          (click)="onTicketTypeSelected(ticket.id)"
+          *ngFor="let session of movie.sessions"
+          [class.active]="session.id === basketItem.id"
+          [value]="session.id"
+          (click)="onSessionSelected(session.id)"
         >
-          {{ ticket.ticketType }}
+          {{ session.starTime }}hs
         </li>
       </ul>
-    </div>
 
-    <div *ngIf="basketItem.price">
-      <div class="mt-4">
-        <h6>Preço do ingresso:</h6>
-        <h4 class="mt-2">{{ basketItem.price | currency: "BRL" }}</h4>
+      <div *ngIf="basketItem.id">
+        <h6 class="my-3">Escolha o tipo de ingresso:</h6>
+        <ul class="list-group list-group-horizontal">
+          <li
+            class="list-group-item text-center text-selection-none"
+            *ngFor="let ticket of selectedSessionPrices['ticket']"
+            [class.active]="ticket.id === basketItem.ticketType"
+            [class.disabled]="ticket.disabled"
+            [value]="ticket.id"
+            (click)="onTicketTypeSelected(ticket.id)"
+          >
+            {{ ticket.ticketType }}
+          </li>
+        </ul>
       </div>
 
-      <h6 class="mt-4">Selecione a quantidade:</h6>
-      <div class="mt-2 text-selection-none">
-        <i
-          class="fa fa-minus-circle increment"
-          (click)="decrementTicketQuantity()"
-        ></i>
-        <span class="mx-3 increment-span">{{ basketItem.quantity }}</span>
-        <i
-          class="fa fa-plus-circle increment"
-          (click)="incrementTicketQuantity()"
-        ></i>
-      </div>
+      <div *ngIf="basketItem.price">
+        <div class="mt-4">
+          <h6>Preço do ingresso:</h6>
+          <h4 class="mt-2">{{ basketItem.price | currency: "BRL" }}</h4>
+        </div>
 
-      <button
-        *ngIf="!addedToBasket"
-        (click)="addTicketToBasket()"
-        class="btn btn-primary mt-4 text-uppercase"
-      >
-        <i class="fa fa-shopping-cart me-2"></i>
-        Adicionar ao carrinho
-      </button>
+        <h6 class="mt-4">Selecione a quantidade:</h6>
+        <div class="mt-2 text-selection-none">
+          <i
+            class="fa fa-minus-circle increment"
+            (click)="decrementTicketQuantity()"
+          ></i>
+          <span class="mx-3 increment-span">{{ basketItem.quantity }}</span>
+          <i
+            class="fa fa-plus-circle increment"
+            (click)="incrementTicketQuantity()"
+          ></i>
+        </div>
 
-      <div *ngIf="addedToBasket" class="mt-4">
-        <button routerLink="/shop" class="btn btn-primary text-uppercase">
-          Continuar comprando
-        </button>
         <button
-          routerLink="/basket"
-          class="btn btn-primary text-uppercase ms-2"
+          *ngIf="!addedToBasket"
+          (click)="addTicketToBasket()"
+          class="btn btn-primary mt-4 text-uppercase"
         >
           <i class="fa fa-shopping-cart me-2"></i>
-          Carrinho
+          Adicionar ao carrinho
         </button>
+
+        <div *ngIf="addedToBasket" class="mt-4">
+          <button routerLink="/shop" class="btn btn-primary text-uppercase">
+            Continuar comprando
+          </button>
+          <button
+            routerLink="/basket"
+            class="btn btn-primary text-uppercase ms-2"
+          >
+            <i class="fa fa-shopping-cart me-2"></i>
+            Carrinho
+          </button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="col-md-1"></div>
+    <div class="col-md-1"></div>
+  </div>
 </div>
