@@ -16,19 +16,11 @@ await scope.MigrateAndSeedAsync();
 
 // Configure the HTTP request pipeline.
 app.UseSwaggerDocumentation();
-
 app.UseMiddleware<ExceptionMiddleware>();
-
 app.UseStatusCodePagesWithReExecute("/errors/{0}");
-
 app.UseHttpsRedirection();
-
 app.UseCors("CorsPolicy");
-
 app.UseAuthentication();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
