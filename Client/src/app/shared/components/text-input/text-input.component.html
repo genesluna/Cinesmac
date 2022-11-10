@@ -1,0 +1,17 @@
+<div class="form-floating">
+  <input
+    [ngClass]="isTouched() ? (!isValid() ? 'is-invalid' : 'is-valid') : null"
+    id="{{ label }}"
+    [type]="type"
+    (input)="onChange($event.target.value)"
+    (blur)="onTouched()"
+    #input
+    class="form-control"
+    placeholder="{{ label }}"
+  />
+  <label for="{{ label }}">{{ label }}</label>
+  <div class="invalid-feedback d-flex" *ngIf="isTouched() && !isValid()">
+    <span *ngIf="getErrors()?.required">Campo {{ label }} é obrigatório</span>
+    <span *ngIf="getErrors()?.pattern">{{ label }} inválido</span>
+  </div>
+</div>

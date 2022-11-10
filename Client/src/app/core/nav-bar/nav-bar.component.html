@@ -24,8 +24,53 @@
           {{ basket.items.length }}
         </div>
       </a>
-      <button class="btn btn-outline-secondary me-2" href="#">Entrar</button>
-      <button class="btn btn-outline-secondary me-3" href="#">Registrar</button>
+      <ng-container *ngIf="(currentUser$ | async) === null">
+        <button
+          routerLink="/account/login"
+          class="btn btn-outline-secondary me-2"
+          href="#"
+        >
+          Entrar
+        </button>
+        <button
+          routerLink="/account/register"
+          class="btn btn-outline-secondary me-3"
+          href="#"
+        >
+          Registrar
+        </button>
+      </ng-container>
+      <ng-container *ngIf="currentUser$ | async as user">
+        <div class="dropdown me-2" dropdown>
+          <a class="dropdown-toggle c-pointer" dropdownToggle>
+            Olá, {{ getFirstName(user.name) }}
+          </a>
+          <div
+            class="dropdown-menu dropdown-menu-right c-pointer"
+            *dropdownMenu
+          >
+            <a
+              routerLink="/basket"
+              class="dropdown-item d-flex align-items-center py-2"
+            >
+              <i class="fa fa-shopping-cart me-3"></i> Carrinho
+            </a>
+            <a
+              routerLink="/orders"
+              class="dropdown-item d-flex align-items-center py-2"
+            >
+              <i class="fa fa-history me-3"></i> Pedidos
+            </a>
+            <div class="dropdown-divider"></div>
+            <a
+              (click)="logout()"
+              class="dropdown-item d-flex align-items-center py-2"
+            >
+              <i class="fa fa-sign-out me-3"></i> Sair
+            </a>
+          </div>
+        </div>
+      </ng-container>
     </div>
   </div>
 </header>
