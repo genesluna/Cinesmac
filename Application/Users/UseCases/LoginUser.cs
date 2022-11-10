@@ -38,7 +38,7 @@ public class LoginUser
 
       if (!result.Succeeded) return Result<UserDto>.Failure(ErrorType.Unauthorized);
 
-      return Result<UserDto>.Success(new UserDto(user.Name, user.Email, _tokenService.CreateToken(user)));
+      return Result<UserDto>.Success(new UserDto(user.Id, user.Name, user.Email, _tokenService.CreateToken(user)));
     }
   }
 }

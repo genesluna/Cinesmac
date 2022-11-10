@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 public class AccountsController : BaseAPIController
 {
-  [HttpGet("is-email-available")]
+  [HttpGet("is-email-available/{email}")]
   public async Task<ActionResult<bool>> IsEmailAvailable(string email)
   {
     return HandleResult(await Mediator.Send(new VerifyEmail.Query { Email = email }));

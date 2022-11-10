@@ -33,7 +33,7 @@ public class RegisterUser
 
       if (!result.Succeeded) return Result<UserDto>.Failure(ErrorType.SaveChangesError, "Failed to create user");
 
-      return Result<UserDto>.Success(new UserDto(user.Name, user.Email, _tokenService.CreateToken(user)));
+      return Result<UserDto>.Success(new UserDto(user.Id, user.Name, user.Email, _tokenService.CreateToken(user)));
     }
   }
 }

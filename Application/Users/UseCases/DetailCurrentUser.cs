@@ -29,7 +29,7 @@ public class DetailCurrentUser
     {
       var user = await _userManager.FindByEmailAsync(request.Email);
 
-      return Result<UserDto>.Success(new UserDto(user.Name, user.Email, _tokenService.CreateToken(user)));
+      return Result<UserDto>.Success(new UserDto(user.Id, user.Name, user.Email, _tokenService.CreateToken(user)));
     }
   }
 }
