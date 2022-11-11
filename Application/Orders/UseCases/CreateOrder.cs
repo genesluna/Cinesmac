@@ -68,12 +68,12 @@ public class CreateOrder
          deliveryMethod, subtotal);
 
       // save to db
-      // _context.Orders.Add(order);
+      _context.Orders.Add(order);
 
-      // var result = await _context.SaveChangesAsync() > 0;
+      var result = await _context.SaveChangesAsync() > 0;
 
-      // if (!result)
-      //   return Result<Order>.Failure(ErrorType.SaveChangesError, "Failed to create order");
+      if (!result)
+        return Result<Order>.Failure(ErrorType.SaveChangesError, "Failed to create order");
 
       // return order
       return Result<Order>.Success(order);

@@ -19,4 +19,31 @@ public class OrdersController : BaseAPIController
       OrderCreateDto = orderCreateDto
     }));
   }
+
+  [Authorize]
+  [HttpGet]
+  public async Task<ActionResult<IReadOnlyList<Order>>> GetOrdersForUser()
+  {
+    return HandleResult(await Mediator.Send(new ListUserOrders.Query
+    {
+      UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
+    }));
+  }
+
+  [Authorize]
+  [HttpGet("{id}")]
+  public async Task<ActionResult<IReadOnlyList<Order>>> GetOrdersByIdForUser(Guid id)
+  {
+    return HandleResult(await Mediator.Send(new DetailUserOrder.Query
+    {
+      UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
+      OrderId = id
+    }));
+  }
+
+  [HttpGet("delivery-methods")]
+  public async Task<ActionResult<IReadOnlyList<DeliveryMethod>>> GetDeliveryMethods()
+  {
+    return HandleResult(await Mediator.Send(new ListDeliveryMethods.Query()));
+  }
 }
