@@ -5,10 +5,29 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
+    /// <inheritdoc />
     public partial class InitialMigration : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "DeliveryMethods",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    DeliveryTime = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Price = table.Column<decimal>(type: "TEXT", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DeliveryMethods", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Movies",
                 columns: table => new
@@ -48,6 +67,33 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    BuyerId = table.Column<string>(type: "TEXT", nullable: false),
+                    AddressStreet = table.Column<string>(name: "Address_Street", type: "TEXT", nullable: true),
+                    AddressCity = table.Column<string>(name: "Address_City", type: "TEXT", nullable: true),
+                    AddressState = table.Column<string>(name: "Address_State", type: "TEXT", nullable: true),
+                    AddressZipCode = table.Column<string>(name: "Address_ZipCode", type: "TEXT", nullable: true),
+                    DeliveryMethodId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    SubTotal = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Status = table.Column<string>(type: "TEXT", nullable: false),
+                    PaymentIntentId = table.Column<string>(type: "TEXT", nullable: true),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    UpdatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_DeliveryMethods_DeliveryMethodId",
+                        column: x => x.DeliveryMethodId,
+                        principalTable: "DeliveryMethods",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Sessions",
                 columns: table => new
                 {
@@ -78,26 +124,42 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tickets",
+                name: "OrderItems",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    TicketType = table.Column<int>(type: "INTEGER", nullable: false),
+                    OrderedItemSessionId = table.Column<string>(name: "OrderedItem_SessionId", type: "TEXT", nullable: true),
+                    OrderedItemSessionStartTime = table.Column<int>(name: "OrderedItem_SessionStartTime", type: "INTEGER", nullable: true),
+                    OrderedItemTicketType = table.Column<int>(name: "OrderedItem_TicketType", type: "INTEGER", nullable: true),
+                    OrderedItemMovieTitle = table.Column<string>(name: "OrderedItem_MovieTitle", type: "TEXT", nullable: true),
+                    OrderedItemScreeningRoomName = table.Column<string>(name: "OrderedItem_ScreeningRoomName", type: "TEXT", nullable: true),
+                    OrderedItemImageUrl = table.Column<string>(name: "OrderedItem_ImageUrl", type: "TEXT", nullable: true),
                     Price = table.Column<decimal>(type: "TEXT", nullable: false),
-                    SessionId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Quantity = table.Column<int>(type: "INTEGER", nullable: false),
+                    OrderId = table.Column<Guid>(type: "TEXT", nullable: true),
                     CreatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tickets", x => x.Id);
+                    table.PrimaryKey("PK_OrderItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tickets_Sessions_SessionId",
-                        column: x => x.SessionId,
-                        principalTable: "Sessions",
+                        name: "FK_OrderItems_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_OrderId",
+                table: "OrderItems",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_DeliveryMethodId",
+                table: "Orders",
+                column: "DeliveryMethodId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sessions_MovieId",
@@ -108,26 +170,28 @@ namespace Persistence.Migrations
                 name: "IX_Sessions_ScreeningRoomId",
                 table: "Sessions",
                 column: "ScreeningRoomId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tickets_SessionId",
-                table: "Tickets",
-                column: "SessionId");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Tickets");
+                name: "OrderItems");
 
             migrationBuilder.DropTable(
                 name: "Sessions");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Movies");
 
             migrationBuilder.DropTable(
                 name: "ScreeningRooms");
+
+            migrationBuilder.DropTable(
+                name: "DeliveryMethods");
         }
     }
 }
