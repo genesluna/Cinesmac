@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Application.Users.Validators;
 
-public class AddressDtoValidator : AbstractValidator<AddressDto>
+public class AddressDtoValidator : AbstractValidator<UserAddressDto>
 {
   public AddressDtoValidator()
   {

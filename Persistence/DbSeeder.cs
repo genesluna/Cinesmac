@@ -1,4 +1,6 @@
+using System.Runtime.InteropServices;
 using Domain.Entities;
+using Domain.Entities.OrderAggregate;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence;
@@ -7,12 +9,13 @@ public static class DbSeeder
 {
   public static async Task SeedAsync(DataContext context)
   {
-    await SeedMovies(context);
-    await SeedScreeningRooms(context);
-    await SeedSessions(context);
+    await SeedMoviesAsync(context);
+    await SeedScreeningRoomsAsync(context);
+    await SeedSessionsAsync(context);
+    await SeedDeliveryMehodsAsync(context);
   }
 
-  private static async Task SeedMovies(DataContext context)
+  private static async Task SeedMoviesAsync(DataContext context)
   {
     if (context.Movies.Any()) return;
 
@@ -146,7 +149,7 @@ public static class DbSeeder
     }
     await context.SaveChangesAsync();
   }
-  private static async Task SeedScreeningRooms(DataContext context)
+  private static async Task SeedScreeningRoomsAsync(DataContext context)
   {
     if (context.ScreeningRooms.Any()) return;
 
@@ -210,7 +213,7 @@ public static class DbSeeder
 
     await context.SaveChangesAsync();
   }
-  private static async Task SeedSessions(DataContext context)
+  private static async Task SeedSessionsAsync(DataContext context)
   {
     if (context.Sessions.Any()) return;
 
@@ -264,4 +267,28 @@ public static class DbSeeder
     }
     await context.SaveChangesAsync();
   }
+  private static async Task SeedDeliveryMehodsAsync(DataContext context)
+  {
+    if (context.DeliveryMethods.Any()) return;
+
+    var deliveryMethods = new List<DeliveryMethod> {
+      new DeliveryMethod {
+        Name = "Uber Delivery",
+        DeliveryTime = "3hs",
+        Price = 10,
+      },
+      new DeliveryMethod {
+        Name = "Download do voucher",
+        DeliveryTime = "Imediato",
+        Price = 0,
+      }
+    };
+
+    foreach (var deliveryMethod in deliveryMethods)
+    {
+      await context.DeliveryMethods.AddAsync(deliveryMethod);
+    }
+    await context.SaveChangesAsync();
+  }
+
 }

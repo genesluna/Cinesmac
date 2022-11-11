@@ -1,4 +1,5 @@
 using Application.Movies.Dtos;
+using Application.Orders.Dtos;
 using Application.ScreeningRooms.Dtos;
 using Application.Sessions.Dtos;
 using Application.Users.Dtos;
@@ -12,7 +13,8 @@ public class MappingProfiles : Profile
 {
   public MappingProfiles()
   {
-    CreateMap<Address, AddressDto>().ReverseMap();
+    CreateMap<Address, UserAddressDto>().ReverseMap();
+    CreateMap<OrderAddressDto, Domain.Entities.OrderAggregate.Address>();
     CreateMap<Movie, MovieDto>();
     CreateMap<MovieCreateDto, Movie>();
     CreateMap<MovieEditDto, Movie>();

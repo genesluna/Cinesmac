@@ -1,4 +1,6 @@
+using System.Reflection;
 using Domain.Entities;
+using Domain.Entities.OrderAggregate;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence;
@@ -10,27 +12,17 @@ public class DataContext : DbContext
   public DbSet<Movie> Movies { get; set; }
   public DbSet<ScreeningRoom> ScreeningRooms { get; set; }
   public DbSet<Session> Sessions { get; set; }
-  public DbSet<Ticket> Tickets { get; set; }
+  public DbSet<Order> Orders { get; set; }
+  public DbSet<OrderItem> OrderItems { get; set; }
+  public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
+
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
-    modelBuilder.Entity<Session>()
-        .HasOne<Movie>(s => s.Movie)
-        .WithMany(m => m.Sessions)
-        .HasForeignKey(s => s.MovieId)
-        .OnDelete(DeleteBehavior.Cascade);
+    base.OnModelCreating(modelBuilder);
 
-    modelBuilder.Entity<Session>()
-        .HasOne<ScreeningRoom>(s => s.ScreeningRoom)
-        .WithMany(sr => sr.Sessions)
-        .HasForeignKey(s => s.ScreeningRoomId)
-        .OnDelete(DeleteBehavior.Restrict);
+    modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-    modelBuilder.Entity<Ticket>()
-        .HasOne<Session>(t => t.Session)
-        .WithMany(s => s.Tickets)
-        .HasForeignKey(t => t.SessionId)
-        .OnDelete(DeleteBehavior.Restrict);
   }
 
   public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

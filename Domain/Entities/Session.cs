@@ -1,3 +1,5 @@
+using Domain.Enums;
+
 namespace Domain.Entities;
 
 public class Session : BaseEntity
@@ -9,5 +11,15 @@ public class Session : BaseEntity
   public Movie Movie { get; set; }
   public Guid ScreeningRoomId { get; set; }
   public ScreeningRoom ScreeningRoom { get; set; }
-  public ICollection<Ticket> Tickets { get; set; }
+
+  public decimal getSessionPrice(TicketType ticketType)
+  {
+    return ticketType switch
+    {
+      TicketType.Full => BasePrice,
+      TicketType.Half => BasePrice / 2,
+      TicketType.Vip => BasePrice * 2,
+      _ => BasePrice
+    };
+  }
 }

@@ -1,3 +1,5 @@
+using Domain.Entities.Enums;
+
 namespace Domain.Entities.OrderAggregate;
 
 public class Order : BaseEntity
@@ -5,19 +7,23 @@ public class Order : BaseEntity
   public Order() { }
 
   public Order(ICollection<OrderItem> orderItems,
-  string buyerId, Address paymentAddress, decimal total)
+      string buyerId, Address address, DeliveryMethod deliveryMethod,
+      decimal subTotal)
   {
     BuyerId = buyerId;
-    PaymentAddress = paymentAddress;
+    Address = address;
+    DeliveryMethod = deliveryMethod;
     OrderItems = orderItems;
-    Total = total;
-    Status = OrderStatus.Pending;
+    SubTotal = subTotal;
   }
 
   public string BuyerId { get; set; }
-  public Address PaymentAddress { get; set; }
+  public Address Address { get; set; }
+  public DeliveryMethod DeliveryMethod { get; set; }
   public ICollection<OrderItem> OrderItems { get; set; }
-  public decimal Total { get; set; }
-  public OrderStatus Status { get; set; }
+  public decimal SubTotal { get; set; }
+  public OrderStatus Status { get; set; } = OrderStatus.Pending;
   public string PaymentIntentId { get; set; }
+
+  public decimal getTotal() => SubTotal + DeliveryMethod.Price;
 }

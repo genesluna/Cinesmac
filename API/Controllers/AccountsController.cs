@@ -29,10 +29,10 @@ public class AccountsController : BaseAPIController
 
   [Authorize]
   [HttpGet("address")]
-  [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AddressDto))]
+  [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserAddressDto))]
   [ProducesResponseType(StatusCodes.Status204NoContent)]
   [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ApiResponse))]
-  public async Task<ActionResult<AddressDto>> GetUserAddress()
+  public async Task<ActionResult<UserAddressDto>> GetUserAddress()
   {
     return HandleResult(await Mediator.Send(new DetailAddress.Query
     {
@@ -59,10 +59,10 @@ public class AccountsController : BaseAPIController
 
   [Authorize]
   [HttpPut("address")]
-  [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AddressDto))]
+  [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserAddressDto))]
   [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ApiResponse))]
   [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiValidationErrorResponse))]
-  public async Task<ActionResult<AddressDto>> UpdateUserAddress(AddressDto addressDto)
+  public async Task<ActionResult<UserAddressDto>> UpdateUserAddress(UserAddressDto addressDto)
   {
     return HandleResult(await Mediator.Send(new EditAddress.Command
     {

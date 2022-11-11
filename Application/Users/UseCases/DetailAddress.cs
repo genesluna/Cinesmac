@@ -10,12 +10,12 @@ namespace Application.Users.UseCases;
 
 public class DetailAddress
 {
-  public class Query : IRequest<Result<AddressDto>>
+  public class Query : IRequest<Result<UserAddressDto>>
   {
     public string Email { get; set; }
   }
 
-  public class Handler : IRequestHandler<Query, Result<AddressDto>>
+  public class Handler : IRequestHandler<Query, Result<UserAddressDto>>
   {
     private readonly UserManager<User> _userManager;
     private readonly IMapper _mapper;
@@ -26,11 +26,11 @@ public class DetailAddress
       _userManager = userManager;
     }
 
-    public async Task<Result<AddressDto>> Handle(Query request, CancellationToken cancellationToken)
+    public async Task<Result<UserAddressDto>> Handle(Query request, CancellationToken cancellationToken)
     {
       var user = await _userManager.FindByEmailWithAddressAsync(request.Email);
 
-      return Result<AddressDto>.Success(_mapper.Map<AddressDto>(user.Address));
+      return Result<UserAddressDto>.Success(_mapper.Map<UserAddressDto>(user.Address));
     }
   }
 }

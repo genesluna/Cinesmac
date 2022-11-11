@@ -1,6 +1,6 @@
 namespace Application.Users.Dtos;
 
-public class AddressDto
+public class UserAddressDto
 {
   public string Street { get; set; }
   public string City { get; set; }

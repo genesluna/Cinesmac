@@ -1,8 +1,5 @@
-using Microsoft.EntityFrameworkCore;
-
 namespace Domain.Entities.OrderAggregate;
 
-[Owned]
 public class Address
 {
   public Address() { }

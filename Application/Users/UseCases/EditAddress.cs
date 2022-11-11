@@ -10,13 +10,13 @@ namespace Application.Users.UseCases;
 
 public class EditAddress
 {
-  public class Command : IRequest<Result<AddressDto>>
+  public class Command : IRequest<Result<UserAddressDto>>
   {
     public string Email { get; set; }
-    public AddressDto AddressDto { get; set; }
+    public UserAddressDto AddressDto { get; set; }
   }
 
-  public class Handler : IRequestHandler<Command, Result<AddressDto>>
+  public class Handler : IRequestHandler<Command, Result<UserAddressDto>>
   {
     private readonly UserManager<User> _userManager;
     private readonly IMapper _mapper;
@@ -27,7 +27,7 @@ public class EditAddress
       _userManager = userManager;
     }
 
-    public async Task<Result<AddressDto>> Handle(Command request, CancellationToken cancellationToken)
+    public async Task<Result<UserAddressDto>> Handle(Command request, CancellationToken cancellationToken)
     {
       var user = await _userManager.FindByEmailWithAddressAsync(request.Email);
 
@@ -35,9 +35,9 @@ public class EditAddress
 
       var result = await _userManager.UpdateAsync(user);
 
-      if (!result.Succeeded) return Result<AddressDto>.Failure(ErrorType.SaveChangesError, "Failed to update address");
+      if (!result.Succeeded) return Result<UserAddressDto>.Failure(ErrorType.SaveChangesError, "Failed to update address");
 
-      return Result<AddressDto>.Success(_mapper.Map<AddressDto>(user.Address));
+      return Result<UserAddressDto>.Success(_mapper.Map<UserAddressDto>(user.Address));
     }
   }
 }
