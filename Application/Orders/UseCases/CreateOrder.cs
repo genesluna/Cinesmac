@@ -75,7 +75,10 @@ public class CreateOrder
       if (!result)
         return Result<Order>.Failure(ErrorType.SaveChangesError, "Failed to create order");
 
-      // return order
+      // delete basket
+      await _db.KeyDeleteAsync(request.OrderCreateDto.BasketId);
+
+      // return order creat result
       return Result<Order>.Success(order);
     }
   }
