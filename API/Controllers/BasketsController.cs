@@ -7,9 +7,9 @@ namespace API.Controllers;
 public class BasketsController : BaseAPIController
 {
   [HttpGet("{id}")]
-  public async Task<ActionResult<Basket>> GetBasket(string id)
+  public async Task<ActionResult<Basket>> GetBasket(string basketId)
   {
-    return HandleResult(await Mediator.Send(new DetailBasket.Query { Id = id }));
+    return HandleResult(await Mediator.Send(new DetailBasket.Query { BasketId = basketId }));
   }
 
   [HttpPost]
@@ -25,9 +25,9 @@ public class BasketsController : BaseAPIController
   }
 
   [HttpDelete("{id}")]
-  public async Task<IActionResult> DeleteBasket(string id)
+  public async Task<IActionResult> DeleteBasket(string basketId)
   {
-    return HandleResult(await Mediator.Send(new DeleteBasket.Command { Id = id }));
+    return HandleResult(await Mediator.Send(new DeleteBasket.Command { BasketId = basketId }));
   }
 
 }

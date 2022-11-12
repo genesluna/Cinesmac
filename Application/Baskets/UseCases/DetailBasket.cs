@@ -1,8 +1,7 @@
-using System.Text.Json;
 using Application.Core;
 using Domain.Entities;
+using Domain.Interfaces;
 using MediatR;
-using StackExchange.Redis;
 
 namespace Application.Baskets.UseCases;
 
@@ -10,25 +9,25 @@ public class DetailBasket
 {
   public class Query : IRequest<Result<Basket>>
   {
-    public string Id { get; set; }
+    public string BasketId { get; set; }
   }
 
   public class Handler : IRequestHandler<Query, Result<Basket>>
   {
-    private readonly IDatabase _db;
-    public Handler(IConnectionMultiplexer redis)
+    private readonly IBasketRepository _basketRepository;
+    public Handler(IBasketRepository basketRepository)
     {
-      _db = redis.GetDatabase();
+      _basketRepository = basketRepository;
     }
 
     public async Task<Result<Basket>> Handle(Query request, CancellationToken cancellationToken)
     {
-      var basket = await _db.StringGetAsync(request.Id);
+      var basket = await _basketRepository.GetBasketAsync(request.BasketId);
 
-      if (basket.IsNullOrEmpty)
+      if (basket == null)
         return Result<Basket>.Failure(ErrorType.NoContent, "Basket not found");
 
-      return Result<Basket>.Success(JsonSerializer.Deserialize<Basket>(basket));
+      return Result<Basket>.Success(basket);
     }
   }
 }

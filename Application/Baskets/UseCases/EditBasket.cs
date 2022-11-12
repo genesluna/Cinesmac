@@ -1,8 +1,7 @@
-using System.Text.Json;
 using Application.Core;
 using Domain.Entities;
+using Domain.Interfaces;
 using MediatR;
-using StackExchange.Redis;
 
 namespace Application.Baskets.UseCases;
 
@@ -15,24 +14,20 @@ public class EditBasket
 
   public class Handler : IRequestHandler<Command, Result<Basket>>
   {
-    private readonly IDatabase _db;
-    public Handler(IConnectionMultiplexer redis)
+    private readonly IBasketRepository _basketRepository;
+    public Handler(IBasketRepository basketRepository)
     {
-      _db = redis.GetDatabase();
+      _basketRepository = basketRepository;
     }
 
     public async Task<Result<Basket>> Handle(Command request, CancellationToken cancellationToken)
     {
-      var result = await _db.StringSetAsync(request.Basket.Id,
-          JsonSerializer.Serialize(request.Basket), TimeSpan.FromDays(7));
+      var basket = await _basketRepository.UpdateBasketAsync(request.Basket);
 
-      if (!result)
+      if (basket == null)
         return Result<Basket>.Failure(ErrorType.SaveChangesError, "Failed to edit basket");
 
-      var basket = JsonSerializer.Deserialize<Basket>(await _db.StringGetAsync(request.Basket.Id));
-
       return Result<Basket>.Success(basket);
-
     }
   }
 }

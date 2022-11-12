@@ -2,9 +2,10 @@ using API.Errors;
 using Application.Core;
 using Application.Movies.UseCases;
 using Application.Movies.Validators;
-using Domain.Entities.Identity.Interfaces;
+using Domain.Interfaces;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Infrastructure.Repositories;
 using Infrastructure.Services;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -68,6 +69,8 @@ public static class ApplicationServiceExtensions
     services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
     services.AddScoped<ITokenService, TokenService>();
+    services.AddScoped<IPaymentService, PaymentService>();
+    services.AddScoped<IBasketRepository, BasketRepository>();
 
     return services;
   }
