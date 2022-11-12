@@ -5,7 +5,7 @@ using Application.Sessions.Dtos;
 using Application.Users.Dtos;
 using AutoMapper;
 using Domain.Entities;
-using Domain.Entities.Identity;
+using Domain.Entities.OrderAggregate;
 
 namespace Application.Core;
 
@@ -13,12 +13,24 @@ public class MappingProfiles : Profile
 {
   public MappingProfiles()
   {
-    CreateMap<Address, UserAddressDto>().ReverseMap();
-    CreateMap<OrderAddressDto, Domain.Entities.OrderAggregate.Address>();
+    CreateMap<Domain.Entities.Identity.Address, UserAddressDto>().ReverseMap();
     CreateMap<Movie, MovieDto>();
     CreateMap<MovieCreateDto, Movie>();
     CreateMap<MovieEditDto, Movie>();
     CreateMap<Session, SessionDto>();
     CreateMap<ScreeningRoom, ScreeningRoomDto>();
+    CreateMap<OrderAddressDto, Domain.Entities.OrderAggregate.Address>();
+
+    CreateMap<Order, OrderDto>()
+        .ForMember(d => d.DeliveryMethod, o => o.MapFrom(s => s.DeliveryMethod.Name))
+        .ForMember(d => d.DeliveryPrice, o => o.MapFrom(s => s.DeliveryMethod.Price));
+
+    CreateMap<OrderItem, OrderItemDto>()
+        .ForMember(d => d.SessionId, o => o.MapFrom(s => s.OrderedItem.SessionId))
+        .ForMember(d => d.MovieTitle, o => o.MapFrom(s => s.OrderedItem.MovieTitle))
+        .ForMember(d => d.ScreeningRoomName, o => o.MapFrom(s => s.OrderedItem.ScreeningRoomName))
+        .ForMember(d => d.SessionStartTime, o => o.MapFrom(s => s.OrderedItem.SessionStartTime))
+        .ForMember(d => d.ImageUrl, o => o.MapFrom(s => s.OrderedItem.ImageUrl))
+        .ForMember(d => d.TicketType, o => o.MapFrom(s => s.OrderedItem.TicketType));
   }
 }

@@ -12,13 +12,13 @@ namespace Application.Orders.UseCases;
 
 public class CreateOrder
 {
-  public class Command : IRequest<Result<Order>>
+  public class Command : IRequest<Result<OrderDto>>
   {
     public string BuyerId { get; set; }
     public OrderCreateDto OrderCreateDto { get; set; }
   }
 
-  public class Handler : IRequestHandler<Command, Result<Order>>
+  public class Handler : IRequestHandler<Command, Result<OrderDto>>
   {
     private readonly DataContext _context;
     private readonly StackExchange.Redis.IDatabase _db;
@@ -30,7 +30,7 @@ public class CreateOrder
       _db = redis.GetDatabase();
     }
 
-    public async Task<Result<Order>> Handle(Command request, CancellationToken cancellationToken)
+    public async Task<Result<OrderDto>> Handle(Command request, CancellationToken cancellationToken)
     {
       // get basket  
       var basketJson = await _db.StringGetAsync(request.OrderCreateDto.BasketId);
@@ -73,13 +73,13 @@ public class CreateOrder
       var result = await _context.SaveChangesAsync() > 0;
 
       if (!result)
-        return Result<Order>.Failure(ErrorType.SaveChangesError, "Failed to create order");
+        return Result<OrderDto>.Failure(ErrorType.SaveChangesError, "Failed to create order");
 
       // delete basket
       await _db.KeyDeleteAsync(request.OrderCreateDto.BasketId);
 
       // return order creat result
-      return Result<Order>.Success(order);
+      return Result<OrderDto>.Success(_mapper.Map<OrderDto>(order));
     }
   }
 }

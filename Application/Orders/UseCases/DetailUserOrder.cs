@@ -1,6 +1,6 @@
 using Application.Core;
+using Application.Orders.Dtos;
 using AutoMapper;
-using Domain.Entities.OrderAggregate;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -9,13 +9,13 @@ namespace Application.Orders.UseCases;
 
 public class DetailUserOrder
 {
-  public class Query : IRequest<Result<Order>>
+  public class Query : IRequest<Result<OrderDto>>
   {
     public string UserId { get; set; }
     public Guid OrderId { get; set; }
   }
 
-  public class Handler : IRequestHandler<Query, Result<Order>>
+  public class Handler : IRequestHandler<Query, Result<OrderDto>>
   {
     private readonly DataContext _context;
     private readonly IMapper _mapper;
@@ -25,7 +25,7 @@ public class DetailUserOrder
       _context = context;
     }
 
-    public async Task<Result<Order>> Handle(Query request, CancellationToken cancellationToken)
+    public async Task<Result<OrderDto>> Handle(Query request, CancellationToken cancellationToken)
     {
       var order = await _context.Orders
           .Include(o => o.DeliveryMethod)
@@ -34,9 +34,9 @@ public class DetailUserOrder
           .FirstOrDefaultAsync();
 
       if (order == null)
-        return Result<Order>.Failure(ErrorType.NotFound, "Order not found");
+        return Result<OrderDto>.Failure(ErrorType.NotFound, "Order not found");
 
-      return Result<Order>.Success(order);
+      return Result<OrderDto>.Success(_mapper.Map<OrderDto>(order));
     }
   }
 }

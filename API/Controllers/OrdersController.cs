@@ -11,7 +11,7 @@ public class OrdersController : BaseAPIController
 {
   [Authorize]
   [HttpPost]
-  public async Task<ActionResult<Order>> CreateOrder(OrderCreateDto orderCreateDto)
+  public async Task<ActionResult<OrderDto>> CreateOrder(OrderCreateDto orderCreateDto)
   {
     return HandleResult(await Mediator.Send(new CreateOrder.Command
     {
@@ -22,7 +22,7 @@ public class OrdersController : BaseAPIController
 
   [Authorize]
   [HttpGet]
-  public async Task<ActionResult<IReadOnlyList<Order>>> GetOrdersForUser()
+  public async Task<ActionResult<IReadOnlyList<OrderDto>>> GetOrdersForUser()
   {
     return HandleResult(await Mediator.Send(new ListUserOrders.Query
     {
@@ -32,7 +32,7 @@ public class OrdersController : BaseAPIController
 
   [Authorize]
   [HttpGet("{id}")]
-  public async Task<ActionResult<IReadOnlyList<Order>>> GetOrdersByIdForUser(Guid id)
+  public async Task<ActionResult<IReadOnlyList<OrderDto>>> GetOrdersByIdForUser(Guid id)
   {
     return HandleResult(await Mediator.Send(new DetailUserOrder.Query
     {
