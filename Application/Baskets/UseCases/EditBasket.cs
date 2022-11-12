@@ -1,4 +1,6 @@
+using Application.Baskets.Dtos;
 using Application.Core;
+using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
 using MediatR;
@@ -7,27 +9,29 @@ namespace Application.Baskets.UseCases;
 
 public class EditBasket
 {
-  public class Command : IRequest<Result<Basket>>
+  public class Command : IRequest<Result<BasketDto>>
   {
-    public Basket Basket { get; set; }
+    public BasketDto BasketDto { get; set; }
   }
 
-  public class Handler : IRequestHandler<Command, Result<Basket>>
+  public class Handler : IRequestHandler<Command, Result<BasketDto>>
   {
     private readonly IBasketRepository _basketRepository;
-    public Handler(IBasketRepository basketRepository)
+    private readonly IMapper _mapper;
+    public Handler(IBasketRepository basketRepository, IMapper mapper)
     {
+      _mapper = mapper;
       _basketRepository = basketRepository;
     }
 
-    public async Task<Result<Basket>> Handle(Command request, CancellationToken cancellationToken)
+    public async Task<Result<BasketDto>> Handle(Command request, CancellationToken cancellationToken)
     {
-      var basket = await _basketRepository.UpdateBasketAsync(request.Basket);
+      var basket = await _basketRepository.UpdateBasketAsync(_mapper.Map<Basket>(request.BasketDto));
 
       if (basket == null)
-        return Result<Basket>.Failure(ErrorType.SaveChangesError, "Failed to edit basket");
+        return Result<BasketDto>.Failure(ErrorType.SaveChangesError, "Failed to edit basket");
 
-      return Result<Basket>.Success(basket);
+      return Result<BasketDto>.Success(_mapper.Map<BasketDto>(basket));
     }
   }
 }

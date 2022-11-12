@@ -1,17 +1,10 @@
-namespace Domain.Entities;
+namespace Application.Baskets.Dtos;
 
-public class Basket
+public class BasketDto
 {
-  public Basket() { }
-
-  public Basket(string id)
-  {
-    Id = id;
-  }
-
   public string Id { get; set; }
   public decimal Total { get; set; }
-  public List<BasketItem> Items { get; set; } = new();
+  public List<BasketItemDto> Items { get; set; } = new();
   public Guid? DeliveryMethodId { get; set; }
   public string ClientSecret { get; set; }
   public string PaymentIntentId { get; set; }

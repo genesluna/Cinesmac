@@ -1,3 +1,4 @@
+using Application.Baskets.Dtos;
 using Application.Movies.Dtos;
 using Application.Orders.Dtos;
 using Application.ScreeningRooms.Dtos;
@@ -14,6 +15,8 @@ public class MappingProfiles : Profile
   public MappingProfiles()
   {
     CreateMap<Domain.Entities.Identity.Address, UserAddressDto>().ReverseMap();
+    CreateMap<Basket, BasketDto>().ReverseMap();
+    CreateMap<BasketItem, BasketItemDto>().ReverseMap();
     CreateMap<Movie, MovieDto>();
     CreateMap<Movie, MoviesListDto>();
     CreateMap<MovieCreateDto, Movie>();

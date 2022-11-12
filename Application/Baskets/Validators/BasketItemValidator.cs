@@ -1,9 +1,9 @@
-using Domain.Entities;
+using Application.Baskets.Dtos;
 using FluentValidation;
 
 namespace Application.Baskets.Validators;
 
-public class BasketItemValidator : AbstractValidator<BasketItem>
+public class BasketItemValidator : AbstractValidator<BasketItemDto>
 {
   public BasketItemValidator()
   {
