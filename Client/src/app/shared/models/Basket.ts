@@ -5,4 +5,7 @@ export class Basket {
   id: string = uuidv4();
   total: number = 0;
   items: BasketItem[] = [];
+  deliveryMethodId?: string;
+  clientSecret?: string;
+  paymentIntentId?: string;
 }
