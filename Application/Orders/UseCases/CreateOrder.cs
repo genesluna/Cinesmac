@@ -1,9 +1,8 @@
-using System.Text.Json;
 using Application.Core;
 using Application.Orders.Dtos;
 using AutoMapper;
-using Domain.Entities;
 using Domain.Entities.OrderAggregate;
+using Domain.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -21,20 +20,20 @@ public class CreateOrder
   public class Handler : IRequestHandler<Command, Result<OrderDto>>
   {
     private readonly DataContext _context;
-    private readonly StackExchange.Redis.IDatabase _db;
     private readonly IMapper _mapper;
-    public Handler(DataContext context, StackExchange.Redis.IConnectionMultiplexer redis, IMapper mapper)
+    private readonly IBasketRepository _basketRepository;
+
+    public Handler(DataContext context, IMapper mapper, IBasketRepository basketRepository)
     {
+      _basketRepository = basketRepository;
       _mapper = mapper;
       _context = context;
-      _db = redis.GetDatabase();
     }
 
     public async Task<Result<OrderDto>> Handle(Command request, CancellationToken cancellationToken)
     {
       // get basket  
-      var basketJson = await _db.StringGetAsync(request.OrderCreateDto.BasketId);
-      var basket = JsonSerializer.Deserialize<Basket>(basketJson);
+      var basket = await _basketRepository.GetBasketAsync(request.OrderCreateDto.BasketId);
 
       // get items
       var items = new List<OrderItem>();
@@ -76,7 +75,7 @@ public class CreateOrder
         return Result<OrderDto>.Failure(ErrorType.SaveChangesError, "Failed to create order");
 
       // delete basket
-      await _db.KeyDeleteAsync(request.OrderCreateDto.BasketId);
+      await _basketRepository.DeleteBasketAsync(request.OrderCreateDto.BasketId);
 
       // return order creat result
       return Result<OrderDto>.Success(_mapper.Map<OrderDto>(order));
