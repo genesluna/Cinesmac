@@ -8,7 +8,7 @@ namespace API.Controllers;
 public class MoviesController : BaseAPIController
 {
   [HttpGet]
-  public async Task<ActionResult<PagedList<MovieDto>>> GetMovies([FromQuery] PagingParameters pagingParams,
+  public async Task<ActionResult<PagedList<MoviesListDto>>> GetMovies([FromQuery] PagingParameters pagingParams,
     CancellationToken cancellationToken)
   {
     return HandleResult(await Mediator.Send(new ListMovies.Query { PagingParams = pagingParams },

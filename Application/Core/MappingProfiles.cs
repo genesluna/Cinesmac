@@ -15,6 +15,7 @@ public class MappingProfiles : Profile
   {
     CreateMap<Domain.Entities.Identity.Address, UserAddressDto>().ReverseMap();
     CreateMap<Movie, MovieDto>();
+    CreateMap<Movie, MoviesListDto>();
     CreateMap<MovieCreateDto, Movie>();
     CreateMap<MovieEditDto, Movie>();
     CreateMap<Session, SessionDto>();
