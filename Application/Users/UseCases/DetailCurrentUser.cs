@@ -1,7 +1,7 @@
 using Application.Core;
 using Application.Users.Dtos;
 using Domain.Entities.Identity;
-using Domain.Entities.Identity.Interfaces;
+using Domain.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 

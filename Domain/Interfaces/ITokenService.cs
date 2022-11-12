@@ -1,4 +1,6 @@
-namespace Domain.Entities.Identity.Interfaces;
+using Domain.Entities.Identity;
+
+namespace Domain.Interfaces;
 
 public interface ITokenService
 {
