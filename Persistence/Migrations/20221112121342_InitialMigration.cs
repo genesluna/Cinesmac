@@ -5,10 +5,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    /// <inheritdoc />
     public partial class InitialMigration : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -72,10 +70,10 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     BuyerId = table.Column<string>(type: "TEXT", nullable: false),
-                    AddressStreet = table.Column<string>(name: "Address_Street", type: "TEXT", nullable: true),
-                    AddressCity = table.Column<string>(name: "Address_City", type: "TEXT", nullable: true),
-                    AddressState = table.Column<string>(name: "Address_State", type: "TEXT", nullable: true),
-                    AddressZipCode = table.Column<string>(name: "Address_ZipCode", type: "TEXT", nullable: true),
+                    Address_Street = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_City = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_State = table.Column<string>(type: "TEXT", nullable: true),
+                    Address_ZipCode = table.Column<string>(type: "TEXT", nullable: true),
                     DeliveryMethodId = table.Column<Guid>(type: "TEXT", nullable: true),
                     SubTotal = table.Column<decimal>(type: "TEXT", nullable: false),
                     Status = table.Column<string>(type: "TEXT", nullable: false),
@@ -128,12 +126,12 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    OrderedItemSessionId = table.Column<string>(name: "OrderedItem_SessionId", type: "TEXT", nullable: true),
-                    OrderedItemSessionStartTime = table.Column<int>(name: "OrderedItem_SessionStartTime", type: "INTEGER", nullable: true),
-                    OrderedItemTicketType = table.Column<int>(name: "OrderedItem_TicketType", type: "INTEGER", nullable: true),
-                    OrderedItemMovieTitle = table.Column<string>(name: "OrderedItem_MovieTitle", type: "TEXT", nullable: true),
-                    OrderedItemScreeningRoomName = table.Column<string>(name: "OrderedItem_ScreeningRoomName", type: "TEXT", nullable: true),
-                    OrderedItemImageUrl = table.Column<string>(name: "OrderedItem_ImageUrl", type: "TEXT", nullable: true),
+                    OrderedItem_SessionId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    OrderedItem_SessionStartTime = table.Column<int>(type: "INTEGER", nullable: true),
+                    OrderedItem_TicketType = table.Column<int>(type: "INTEGER", nullable: true),
+                    OrderedItem_MovieTitle = table.Column<string>(type: "TEXT", nullable: true),
+                    OrderedItem_ScreeningRoomName = table.Column<string>(type: "TEXT", nullable: true),
+                    OrderedItem_ImageUrl = table.Column<string>(type: "TEXT", nullable: true),
                     Price = table.Column<decimal>(type: "TEXT", nullable: false),
                     Quantity = table.Column<int>(type: "INTEGER", nullable: false),
                     OrderId = table.Column<Guid>(type: "TEXT", nullable: true),
@@ -172,7 +170,6 @@ namespace Persistence.Migrations
                 column: "ScreeningRoomId");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

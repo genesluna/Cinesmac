@@ -11,14 +11,13 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221111153309_InitialMigration")]
+    [Migration("20221112121342_InitialMigration")]
     partial class InitialMigration
     {
-        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
+            modelBuilder.HasAnnotation("ProductVersion", "6.0.11");
 
             modelBuilder.Entity("Domain.Entities.Movie", b =>
                 {
@@ -276,7 +275,7 @@ namespace Persistence.Migrations
                             b1.Property<string>("ScreeningRoomName")
                                 .HasColumnType("TEXT");
 
-                            b1.Property<string>("SessionId")
+                            b1.Property<Guid>("SessionId")
                                 .HasColumnType("TEXT");
 
                             b1.Property<int>("SessionStartTime")

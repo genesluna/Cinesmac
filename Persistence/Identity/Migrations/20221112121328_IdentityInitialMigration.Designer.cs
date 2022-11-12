@@ -11,14 +11,13 @@ using Persistence.Identity;
 namespace Persistence.Identity.Migrations
 {
     [DbContext(typeof(IdentityDataContext))]
-    [Migration("20221111152945_IdentityInitialMigration")]
+    [Migration("20221112121328_IdentityInitialMigration")]
     partial class IdentityInitialMigration
     {
-        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
+            modelBuilder.HasAnnotation("ProductVersion", "6.0.11");
 
             modelBuilder.Entity("Domain.Entities.Identity.Address", b =>
                 {
