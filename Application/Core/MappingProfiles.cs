@@ -15,6 +15,7 @@ public class MappingProfiles : Profile
   public MappingProfiles()
   {
     CreateMap<Domain.Entities.Identity.Address, UserAddressDto>().ReverseMap();
+    CreateMap<DeliveryMethod, DeliveryMethodDto>().ReverseMap();
     CreateMap<Basket, BasketDto>().ReverseMap();
     CreateMap<BasketItem, BasketItemDto>().ReverseMap();
     CreateMap<Movie, MovieDto>();

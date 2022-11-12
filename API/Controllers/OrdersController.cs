@@ -42,7 +42,7 @@ public class OrdersController : BaseAPIController
   }
 
   [HttpGet("delivery-methods")]
-  public async Task<ActionResult<IReadOnlyList<DeliveryMethod>>> GetDeliveryMethods()
+  public async Task<ActionResult<IReadOnlyList<DeliveryMethodDto>>> GetDeliveryMethods()
   {
     return HandleResult(await Mediator.Send(new ListDeliveryMethods.Query()));
   }
