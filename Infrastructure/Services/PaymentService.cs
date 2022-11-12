@@ -1,5 +1,8 @@
 using Domain.Entities;
+using Domain.Entities.Enums;
+using Domain.Entities.OrderAggregate;
 using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Persistence;
 using Stripe;
@@ -19,7 +22,7 @@ public class PaymentService : IPaymentService
     _config = config;
   }
 
-  public async Task<Basket> CreateOrUpdatePaymentIntent(string basketId)
+  public async Task<Basket> CreateOrUpdatePaymentIntentAsync(string basketId)
   {
     StripeConfiguration.ApiKey = _config["StripeSettings:SecretKey"];
 
@@ -66,5 +69,31 @@ public class PaymentService : IPaymentService
     await _basketRepository.UpdateBasketAsync(basket);
 
     return basket;
+  }
+
+  public async Task<Order> UpdateOrderPaymentFailedAsync(string paymentIntentId)
+  {
+    var order = await _context.Orders.FirstOrDefaultAsync(o => o.PaymentIntentId == paymentIntentId);
+
+    if (order == null) return null;
+
+    order.Status = OrderStatus.PaymentFailed;
+
+    await _context.SaveChangesAsync();
+
+    return order;
+  }
+
+  public async Task<Order> UpdateOrderPaymentSucceededAsync(string paymentIntentId)
+  {
+    var order = await _context.Orders.FirstOrDefaultAsync(o => o.PaymentIntentId == paymentIntentId);
+
+    if (order == null) return null;
+
+    order.Status = OrderStatus.PaymentRecevied;
+
+    await _context.SaveChangesAsync();
+
+    return order;
   }
 }

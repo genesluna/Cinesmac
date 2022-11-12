@@ -13,4 +13,10 @@ public class PaymentsController : BaseAPIController
   {
     return HandleResult(await Mediator.Send(new CreateUpdatePaymentIntent.Command { BasketId = basketId }));
   }
+
+  [HttpPost("webhook")]
+  public async Task<IActionResult> StripeWebhook()
+  {
+    return await Mediator.Send(new PaymentHook.Command { HttpRequest = Request });
+  }
 }

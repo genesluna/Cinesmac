@@ -25,7 +25,7 @@ public class CreateUpdatePaymentIntent
 
     public async Task<Result<BasketDto>> Handle(Command request, CancellationToken cancellationToken)
     {
-      var basket = await _paymentService.CreateOrUpdatePaymentIntent(request.BasketId);
+      var basket = await _paymentService.CreateOrUpdatePaymentIntentAsync(request.BasketId);
 
       if (basket == null)
         return Result<BasketDto>.Failure(ErrorType.SaveChangesError, "Failed to create/update payment intent");
