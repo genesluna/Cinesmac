@@ -14,6 +14,7 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{76F115A5-00DD-4CDA-BF93-92818994BDE0}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F47B42C2-6938-4087-BE08-66D5A71DAB34} = {F47B42C2-6938-4087-BE08-66D5A71DAB34}
+		{F5C1151D-032E-44BE-A7AC-99020A35D9E2} = {F5C1151D-032E-44BE-A7AC-99020A35D9E2}
 	EndProjectSection
 EndProject
 Global
