@@ -1,0 +1,40 @@
+<div class="mt-1 mb-1 p-3">
+  <h4>Formas de envio</h4>
+</div>
+
+<div class="px-3 mb-3" [formGroup]="checkoutForm">
+  <div class="row g-4" formGroupName="deliveryForm">
+    <div class="col-md-6 form-check" *ngFor="let method of deliveryMethods">
+      <input
+        type="radio"
+        (click)="setShippingPrice(method)"
+        class="form-check-input"
+        id="{{ method.id }}"
+        value="{{ method.id }}"
+        formControlName="deliveryMethod"
+      />
+      <label for="{{ method.id }}" class="form-check-label ms-3">
+        <strong>
+          {{ method.name }} - {{ method.price | currency: "BRL" }}
+        </strong>
+        <br />
+        <span class="label-description">{{ method.description }}</span>
+      </label>
+    </div>
+  </div>
+</div>
+
+<div
+  class="float-none d-flex justify-content-between flex-column flex-lg-row mb-4 p-3"
+>
+  <button class="btn btn-outline-secondary" cdkStepperPrevious>
+    <i class="fa fa-angle-left"></i> Voltar
+  </button>
+  <button
+    [disabled]="!checkoutForm.get('deliveryForm').valid"
+    class="btn btn-primary"
+    cdkStepperNext
+  >
+    Próximo <i class="fa fa-angle-right"></i>
+  </button>
+</div>

@@ -1,0 +1,25 @@
+button.nav-link {
+  background: rgb(242, 242, 242);
+  color: lightseagreen;
+  border-radius: 0;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+  &.active:hover {
+    color: white;
+  }
+  &:active {
+    outline: none;
+  }
+  &:active:focus {
+    outline: none;
+  }
+
+  &.active {
+    &.active {
+      background-color: lightseagreen;
+    }
+  }
+}

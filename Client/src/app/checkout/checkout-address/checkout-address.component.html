@@ -1,0 +1,56 @@
+<div class="mt-1 p-3" [formGroup]="checkoutForm">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4>Endereço de entrega</h4>
+    <button
+      (click)="saveUserAddress()"
+      [disabled]="
+        !checkoutForm.get('addressForm').valid ||
+        !checkoutForm.get('addressForm').dirty
+      "
+      class="btn btn-outline-secondary"
+    >
+      Salvar como endereço padrão
+    </button>
+  </div>
+  <div class="row g-2" formGroupName="addressForm">
+    <div class="form-group mt-2">
+      <app-text-input
+        [label]="'Endereço'"
+        formControlName="street"
+      ></app-text-input>
+    </div>
+    <div class="form-group">
+      <app-text-input
+        [label]="'Cidade'"
+        formControlName="city"
+      ></app-text-input>
+    </div>
+    <div class="form-group">
+      <app-text-input
+        [label]="'Estado'"
+        formControlName="state"
+      ></app-text-input>
+    </div>
+    <div class="form-group">
+      <app-text-input
+        [label]="'CEP'"
+        formControlName="zipCode"
+      ></app-text-input>
+    </div>
+  </div>
+</div>
+
+<div
+  class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5 p-3"
+>
+  <button class="btn btn-outline-secondary" routerLink="/basket">
+    <i class="fa fa-angle-left"></i> Voltar ao carrinho
+  </button>
+  <button
+    [disabled]="!checkoutForm.get('addressForm').valid"
+    class="btn btn-primary"
+    cdkStepperNext
+  >
+    Próximo <i class="fa fa-angle-right"></i>
+  </button>
+</div>

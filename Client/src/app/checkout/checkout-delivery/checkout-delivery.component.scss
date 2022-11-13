@@ -1,0 +1,11 @@
+.form-check-input {
+  &:checked {
+    background-color: lightseagreen;
+    border: none;
+  }
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+}

@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Basket } from '../shared/models/Basket';
 import { BasketItem } from '../shared/models/BasketItem';
+import { DeliveryMethod } from '../shared/models/DeliveryMethod';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +33,11 @@ export class BasketService {
   }
 
   private calculateTotals(basket: Basket) {
-    basket.total = basket.items.reduce((a, b) => b.price * b.quantity + a, 0);
+    basket.subTotal = basket.items.reduce(
+      (a, b) => b.price * b.quantity + a,
+      0
+    );
+    basket.total = basket.subTotal + basket.shippingPrice;
   }
 
   private createBasket(): Basket {
@@ -101,5 +106,12 @@ export class BasketService {
       },
       error: (error) => console.log(error),
     });
+  }
+
+  setShippingPrice(deliveryMethod: DeliveryMethod) {
+    const basket = this.getCurrentBasketValue();
+    basket.shippingPrice = deliveryMethod.price;
+    this.calculateTotals(basket);
+    this.basketSource.next(basket);
   }
 }

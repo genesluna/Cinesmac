@@ -1,3 +1,59 @@
-<div class="container mt-3 text-center">
-  <h1>🚧👷 - Em Construção - 🏗️🚧</h1>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-8">
+      <app-stepper [linearModeSelected]="true" #appStepper>
+        <cdk-step
+          [label]="'Endereço'"
+          [completed]="checkoutForm.get('addressForm').valid"
+        >
+          <app-checkout-address
+            [checkoutForm]="checkoutForm"
+          ></app-checkout-address>
+        </cdk-step>
+        <cdk-step
+          [label]="'Entrega'"
+          [completed]="checkoutForm.get('deliveryForm').valid"
+        >
+          <app-checkout-delivery
+            [checkoutForm]="checkoutForm"
+          ></app-checkout-delivery>
+        </cdk-step>
+        <cdk-step [label]="'Revisão'">
+          <app-checkout-review></app-checkout-review>
+        </cdk-step>
+        <cdk-step [label]="'Pagamento'">
+          <app-checkout-payment
+            [checkoutForm]="checkoutForm"
+          ></app-checkout-payment>
+        </cdk-step>
+      </app-stepper>
+    </div>
+    <div class="col-md-4">
+      <div class="header-dark-light px-4 py-3 text-uppercase fw-bold">
+        Sumário do Pedido
+      </div>
+      <div class="p-4">
+        <p class="mb-4">
+          <em>
+            Os custos de entrega serão adicinados dependendo das escolhas feitas
+            durante a finalização do pedido
+          </em>
+        </p>
+        <ul class="list-unstyled mb-4" *ngIf="basket$ | async as basket">
+          <li class="d-flex justify-content-between py-3 border-bottom">
+            <strong class="text-muted">Subtotal</strong>
+            <strong>{{ basket.subTotal | currency: "BRL" }}</strong>
+          </li>
+          <li class="d-flex justify-content-between py-3 border-bottom">
+            <strong class="text-muted">Entrega</strong>
+            <strong>{{ basket.shippingPrice | currency: "BRL" }}</strong>
+          </li>
+          <li class="d-flex justify-content-between py-3 border-bottom">
+            <strong class="text-muted">Total</strong>
+            <strong>{{ basket.total | currency: "BRL" }}</strong>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
