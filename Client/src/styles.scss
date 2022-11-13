@@ -54,4 +54,9 @@ a {
     background-color: $base-color-disabled;
     border-color: $base-color-disabled;
   }
+
+  &.disabled {
+    background-color: $base-color-disabled;
+    border-color: $base-color-disabled;
+  }
 }
