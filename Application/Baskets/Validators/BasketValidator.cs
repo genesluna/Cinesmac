@@ -9,6 +9,7 @@ public class BasketValidator : AbstractValidator<BasketDto>
   {
     RuleFor(x => x.Id).NotEmpty();
     RuleFor(x => x.Total).NotEmpty();
+    RuleFor(x => x.SubTotal).NotEmpty();
     RuleFor(x => x.Items).NotEmpty();
   }
 }
