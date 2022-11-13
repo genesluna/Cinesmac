@@ -275,13 +275,27 @@ public static class DbSeeder
       new DeliveryMethod {
         Name = "Uber Delivery",
         DeliveryTime = "3hs",
+        Description = "Entregue em até 3hs",
+        Price = 15,
+      },
+      new DeliveryMethod {
+        Name = "Motoboy",
+        DeliveryTime = "Imediato",
+        Description = "Entregue em até 3hs",
         Price = 10,
       },
       new DeliveryMethod {
-        Name = "Download do voucher",
+        Name = "Carta registrada",
+        DeliveryTime = "2 dias",
+        Description = "Entregue em até 2 dias",
+        Price = 5,
+      },
+      new DeliveryMethod {
+        Name = "Grátis",
         DeliveryTime = "Imediato",
+        Description = "Baixe o voucher no site",
         Price = 0,
-      }
+      },
     };
 
     foreach (var deliveryMethod in deliveryMethods)
