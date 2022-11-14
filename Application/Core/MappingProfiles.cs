@@ -24,7 +24,7 @@ public class MappingProfiles : Profile
     CreateMap<MovieEditDto, Movie>();
     CreateMap<Session, SessionDto>();
     CreateMap<ScreeningRoom, ScreeningRoomDto>();
-    CreateMap<OrderAddressDto, Domain.Entities.OrderAggregate.Address>();
+    CreateMap<OrderAddressDto, Domain.Entities.OrderAggregate.Address>().ReverseMap();
 
     CreateMap<Order, OrderDto>()
         .ForMember(d => d.DeliveryMethod, o => o.MapFrom(s => s.DeliveryMethod.Name))
