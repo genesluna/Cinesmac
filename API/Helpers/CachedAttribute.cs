@@ -19,8 +19,10 @@ public class CachedAttribute : Attribute, IAsyncActionFilter
 
     var cashKey = GenerateCacheKeyFromRequest(context.HttpContext.Request);
     var cachedResponse = await cacheService.GetCachedResponseAsync(cashKey);
+    var cachedResponseHeaders = await cacheService.GetCachedResponseHeadersAsync(cashKey);
 
-    if (!string.IsNullOrEmpty(cachedResponse))
+    if (!string.IsNullOrEmpty(cachedResponse) &&
+        cachedResponseHeaders != null)
     {
       var contentResult = new ContentResult
       {
@@ -31,6 +33,11 @@ public class CachedAttribute : Attribute, IAsyncActionFilter
 
       context.Result = contentResult;
 
+      foreach (var header in cachedResponseHeaders)
+      {
+        context.HttpContext.Response.Headers.Add(header.Key, header.Value.ElementAt(0));
+      }
+
       return;
     }
 
@@ -38,7 +45,9 @@ public class CachedAttribute : Attribute, IAsyncActionFilter
 
     if (executedContext.Result is OkObjectResult okObjectResult)
     {
+      var headers = executedContext.HttpContext.Response.Headers;
       await cacheService.CacheResponseAsync(cashKey, okObjectResult.Value, TimeSpan.FromSeconds(_timeToLiveSeconds));
+      await cacheService.CacheResponseHeadersAsync(cashKey, headers, TimeSpan.FromSeconds(_timeToLiveSeconds));
     }
   }
 
