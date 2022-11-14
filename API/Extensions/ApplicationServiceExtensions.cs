@@ -54,8 +54,8 @@ public static class ApplicationServiceExtensions
       });
     });
 
-    services.AddDbContext<DataContext>(opt => opt.UseSqlite(config.GetConnectionString("DefaultConnection")));
-    services.AddDbContext<IdentityDataContext>(opt => opt.UseSqlite(config.GetConnectionString("IdentityConnection")));
+    services.AddDbContext<DataContext>(opt => opt.UseNpgsql(config.GetConnectionString("DefaultConnection")));
+    services.AddDbContext<IdentityDataContext>(opt => opt.UseNpgsql(config.GetConnectionString("IdentityConnection")));
 
     services.AddSingleton<IConnectionMultiplexer>(cfg =>
     {
