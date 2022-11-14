@@ -1,0 +1,110 @@
+<div class="container mt-3">
+  <div class="row" *ngIf="order">
+    <div class="table-responsive col-md-9">
+      <table class="table table-hover">
+        <thead class="table-dark-light">
+          <tr>
+            <th class="align-middle" scope="col">
+              <div class="text-uppercase py-2 px-3">Filme</div>
+            </th>
+            <th class="align-middle text-center" scope="col">
+              <div class="text-uppercase py-2">Preço</div>
+            </th>
+            <th class="align-middle text-center" scope="col">
+              <div class="text-uppercase py-2">Quantidade</div>
+            </th>
+            <th class="align-middle text-center" scope="col">
+              <div class="text-uppercase py-2">Total</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of order.orderItems">
+            <td class="align-middle px-3 py-2">
+              <div class="p-2">
+                <img
+                  src="{{ item.imageUrl }}"
+                  alt="{{ item.movieTitle }}"
+                  class="img-fluid img-max-h-50"
+                />
+                <div class="ms-3 d-inline-block align-middle">
+                  <h5 class="mb-0">
+                    <a>{{ item.movieTitle }}</a>
+                  </h5>
+                  <span class="text-muted d-block">
+                    <em>
+                      Sessão: {{ item.sessionStartTime }}hs - Ingresso:
+                      {{ getTicketTypeName(item.ticketType) }}
+                    </em>
+                  </span>
+                </div>
+              </div>
+            </td>
+            <td class="align-middle text-center py-2 fw-bold">
+              {{ item.price | currency: "BRL" }}
+            </td>
+            <td class="align-middle text-center text-selection-none py-2">
+              <span class="mx-3 increment-span">{{ item.quantity }}</span>
+            </td>
+            <td class="align-middle text-center py-2 fw-bold">
+              {{ item.price * item.quantity | currency: "BRL" }}
+            </td>
+          </tr>
+        </tbody>
+        <!-- <tfoot class="">
+          <tr>
+            <td class="border-0"></td>
+            <td class="border-0"></td>
+            <td class="table-dark-light align-middle text-center py-2 fw-bold">
+              Subtotal
+            </td>
+            <td class="table-dark-light align-middle text-center py-2 fw-bold">
+              {{ order.subTotal | currency: "BRL" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="border-0"></td>
+            <td class="border-0"></td>
+            <td class="table-dark-light align-middle text-center py-2 fw-bold">
+              Entrega
+            </td>
+            <td class="table-dark-light align-middle text-center py-2 fw-bold">
+              {{ order.deliveryPrice | currency: "BRL" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="border-0"></td>
+            <td class="border-0"></td>
+            <td class="table-dark-light align-middle text-center py-2 fw-bold">
+              Total
+            </td>
+            <td class="table-dark-light align-middle text-center py-2 fw-bold">
+              {{ order.total | currency: "BRL" }}
+            </td>
+          </tr>
+        </tfoot> -->
+      </table>
+    </div>
+    <div class="col-md-3">
+      <div class="table-dark-light px-4 py-3 text-uppercase fw-bold">
+        Sumário do Pedido
+      </div>
+      <div class="p-4">
+        <ul class="list-unstyled mb-4">
+          <li class="d-flex justify-content-between py-3 border-bottom">
+            <strong class="text-muted">Subtotal</strong>
+            <strong>{{ order.subTotal | currency: "BRL" }}</strong>
+          </li>
+          <li class="d-flex justify-content-between py-3 border-bottom">
+            <strong class="text-muted">Entrega</strong>
+            <strong>{{ order.deliveryPrice | currency: "BRL" }}</strong>
+          </li>
+          <li class="d-flex justify-content-between py-3 border-bottom">
+            <strong class="text-muted">Total</strong>
+            <strong>{{ order.total | currency: "BRL" }}</strong>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
