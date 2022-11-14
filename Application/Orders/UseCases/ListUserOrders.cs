@@ -30,6 +30,7 @@ public class ListUserOrders
           .Include(o => o.DeliveryMethod)
           .Include(o => o.OrderItems)
           .Where(o => o.BuyerId == request.UserId)
+          .OrderBy(o => o.CreatedAt)
           .ToListAsync();
 
       if (orders.Count > 0)
