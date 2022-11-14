@@ -1,0 +1,7 @@
+
+stripe listen -f https://localhost:5001/api/v1/payments/webhook -e charge.succeeded,charge.failed
+
+dotnet ef migrations add InitialMigration -p Persistence -s API -c DataContext
+
+dotnet ef migrations add IdentityInitialMigration -p Persistence -s API -c IdentityDataContext -o Identity/Migrations
+
