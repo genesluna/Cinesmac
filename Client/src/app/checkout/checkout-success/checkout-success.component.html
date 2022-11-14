@@ -1,1 +1,27 @@
-<p>checkout-success works!</p>
+<div class="container mt-5">
+  <div class="row align-items-center justify-content-center">
+    <div class="col-md-1"><i class="fa fa-check-circle fa-5x"></i></div>
+    <div class="col-md-6">
+      <h2>Obrigado. Seu pedido foi conformado</h2>
+      <p class="mb-4">
+        Seu pedido será enviado de acordo com a forma escolhida. Ou, se você
+        escolheu baixar o voucher, é só cliclar no botão abaixo para ver o seu
+        pedido.
+      </p>
+      <button
+        class="btn btn-outline-secondary"
+        *ngIf="order"
+        routerLink="/orders/{{ order.id }}"
+      >
+        Veja seu pedido
+      </button>
+      <button
+        class="btn btn-outline-secondary"
+        *ngIf="!order"
+        routerLink="/orders"
+      >
+        Veja seus pedidos
+      </button>
+    </div>
+  </div>
+</div>

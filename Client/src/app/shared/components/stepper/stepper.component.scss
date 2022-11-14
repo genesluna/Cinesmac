@@ -22,4 +22,9 @@ button.nav-link {
       background-color: lightseagreen;
     }
   }
+
+  &:disabled:not(.active) {
+    background: rgb(242, 242, 242);
+    color: lightseagreen;
+  }
 }
