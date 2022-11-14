@@ -35,7 +35,7 @@ public class ListUserOrders
       if (orders.Count > 0)
         return Result<List<OrderDto>>.Success(_mapper.Map<List<OrderDto>>(orders));
 
-      return Result<List<OrderDto>>.Failure(ErrorType.NotFound, "Orders not found for this user");
+      return Result<List<OrderDto>>.Failure(ErrorType.NoContent, "Orders not found for this user");
     }
   }
 }
