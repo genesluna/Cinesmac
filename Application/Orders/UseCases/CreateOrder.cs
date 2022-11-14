@@ -22,9 +22,11 @@ public class CreateOrder
     private readonly DataContext _context;
     private readonly IMapper _mapper;
     private readonly IBasketRepository _basketRepository;
+    private readonly IPaymentService _paymentService;
 
-    public Handler(DataContext context, IMapper mapper, IBasketRepository basketRepository)
+    public Handler(DataContext context, IMapper mapper, IBasketRepository basketRepository, IPaymentService paymentService)
     {
+      _paymentService = paymentService;
       _basketRepository = basketRepository;
       _mapper = mapper;
       _context = context;
@@ -61,23 +63,28 @@ public class CreateOrder
       // calculate subtotal
       var subtotal = items.Sum(item => item.Price * item.Quantity);
 
+      // check if the order exists and, if so, remove it
+      var existingOrder = await _context.Orders.FirstOrDefaultAsync(o => o.PaymentIntentId == basket.PaymentIntentId);
+      if (existingOrder != null)
+      {
+        _context.Orders.Remove(existingOrder);
+        await _paymentService.CreateOrUpdatePaymentIntentAsync(basket.PaymentIntentId);
+      }
+
       // create order
       var order = new Order(items, request.BuyerId,
          _mapper.Map<Address>(request.OrderCreateDto.OrderAddress),
-         deliveryMethod, subtotal);
+         deliveryMethod, subtotal, basket.PaymentIntentId);
 
-      // save to db
       _context.Orders.Add(order);
 
+      // save to db
       var result = await _context.SaveChangesAsync() > 0;
 
+      // return order create result
       if (!result)
         return Result<OrderDto>.Failure(ErrorType.SaveChangesError, "Failed to create order");
 
-      // delete basket
-      await _basketRepository.DeleteBasketAsync(request.OrderCreateDto.BasketId);
-
-      // return order creat result
       return Result<OrderDto>.Success(_mapper.Map<OrderDto>(order));
     }
   }
