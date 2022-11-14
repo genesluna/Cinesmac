@@ -17,7 +17,10 @@ await scope.MigrateAndSeedAsync();
 // Configure the HTTP request pipeline.
 app.UseSwaggerDocumentation();
 app.UseMiddleware<ExceptionMiddleware>();
-app.UseStatusCodePagesWithReExecute("/errors/{0}");
+
+// Disabled because we're now hosting the client app
+// app.UseStatusCodePagesWithReExecute("/errors/{0}");
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
@@ -25,6 +28,6 @@ app.UseCors("CorsPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllerRoute(name: "default", pattern: "{controller}/{action=Index}/{id?}");
-app.MapFallbackToFile("index.html"); ;
+app.MapFallbackToFile("index.html");
 
 app.Run();
