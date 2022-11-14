@@ -8,13 +8,14 @@ public class Order : BaseEntity
 
   public Order(ICollection<OrderItem> orderItems,
       string buyerId, Address address, DeliveryMethod deliveryMethod,
-      decimal subTotal)
+      decimal subTotal, string paymentIntentId)
   {
     BuyerId = buyerId;
     Address = address;
     DeliveryMethod = deliveryMethod;
     OrderItems = orderItems;
     SubTotal = subTotal;
+    PaymentIntentId = paymentIntentId;
   }
 
   public string BuyerId { get; set; }
