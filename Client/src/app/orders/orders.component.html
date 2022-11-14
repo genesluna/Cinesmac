@@ -11,7 +11,7 @@
             <th class="text-center text-uppercase py-3" scope="col">#</th>
             <th class="text-uppercase py-3 px-3" scope="col">Data</th>
             <th class="text-uppercase py-3 px-3" scope="col">Total</th>
-            <th class="text-uppercase py-3 px-3" scope="col">Status</th>
+            <th class="text-uppercase py-3 px-3" scope="col">Situação</th>
           </tr>
         </thead>
         <tbody>
@@ -28,7 +28,9 @@
             <td class="align-middle px-3">
               {{ order.total | currency: "BRL" }}
             </td>
-            <td class="align-middle px-3">{{ order.status }}</td>
+            <td class="align-middle px-3">
+              {{ getOrderStatus(order.status) }}
+            </td>
           </tr>
         </tbody>
       </table>

@@ -25,4 +25,15 @@ export class OrdersComponent implements OnInit {
       error: (error) => console.log(error),
     });
   }
+
+  getOrderStatus(staus: string): string {
+    switch (staus) {
+      case 'Pending':
+        return 'Pagamento pendente';
+      case 'Payment Received':
+        return 'Pagamento recebido';
+      case 'Payment Failed':
+        return 'Falha no pagamento';
+    }
+  }
 }
