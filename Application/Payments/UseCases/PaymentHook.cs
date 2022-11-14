@@ -37,23 +37,16 @@ public class PaymentHook
 
       var charge = (Charge)stripeEvent.Data.Object;
 
-      PaymentIntent intent;
       Order order;
 
       switch (charge.Status)
       {
         case "succeeded":
-          intent = (PaymentIntent)stripeEvent.Data.Object;
-          _logger.LogInformation("Payment Succeeded: ", intent.Id);
-          order = await _paymentService.UpdateOrderPaymentSucceededAsync(intent.Id);
-          _logger.LogInformation("Order updated to payment received: ", intent.Id);
+          order = await _paymentService.UpdateOrderPaymentSucceededAsync(charge.PaymentIntentId);
           break;
 
-        case "payment_failed":
-          intent = (PaymentIntent)stripeEvent.Data.Object;
-          _logger.LogInformation("Payment Failed: ", intent.Id);
-          order = await _paymentService.UpdateOrderPaymentFailedAsync(intent.Id);
-          _logger.LogInformation("Order updated to payment failed: ", intent.Id);
+        case "failed":
+          order = await _paymentService.UpdateOrderPaymentFailedAsync(charge.PaymentIntentId);
           break;
       }
 

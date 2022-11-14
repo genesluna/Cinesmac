@@ -55,7 +55,7 @@ public class PaymentService : IPaymentService
       {
         Amount = (long)basket.Items.Sum(i => i.Quantity * (i.Price * 100)) + (long)deliveryPrice * 100,
         Currency = "brl",
-        PaymentMethodTypes = new List<string> { "card" }
+        PaymentMethodTypes = new List<string> { "pm_card_br" }
       };
       intent = await service.CreateAsync(options);
       basket.PaymentIntentId = intent.Id;
