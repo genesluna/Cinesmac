@@ -71,6 +71,7 @@ public static class ApplicationServiceExtensions
     services.AddScoped<ITokenService, TokenService>();
     services.AddScoped<IPaymentService, PaymentService>();
     services.AddScoped<IBasketRepository, BasketRepository>();
+    services.AddSingleton<IResponseCacheService, ResponseCacheService>();
 
     return services;
   }

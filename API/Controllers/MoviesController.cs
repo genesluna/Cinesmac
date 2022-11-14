@@ -1,3 +1,4 @@
+using API.Helpers;
 using Application.Core;
 using Application.Movies.Dtos;
 using Application.Movies.UseCases;
@@ -7,6 +8,7 @@ namespace API.Controllers;
 
 public class MoviesController : BaseAPIController
 {
+  [Cached(600)]
   [HttpGet]
   public async Task<ActionResult<PagedList<MoviesListDto>>> GetMovies([FromQuery] PagingParameters pagingParams,
     CancellationToken cancellationToken)
@@ -15,6 +17,7 @@ public class MoviesController : BaseAPIController
       cancellationToken));
   }
 
+  [Cached(600)]
   [HttpGet("{id}")]
   public async Task<ActionResult<MovieDto>> GetMovie(Guid id)
   {

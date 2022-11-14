@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using API.Helpers;
 using Application.Orders.Dtos;
 using Application.Orders.UseCases;
 using Domain.Entities.OrderAggregate;
@@ -41,6 +42,7 @@ public class OrdersController : BaseAPIController
     }));
   }
 
+  [Cached(600)]
   [HttpGet("delivery-methods")]
   public async Task<ActionResult<IReadOnlyList<DeliveryMethodDto>>> GetDeliveryMethods()
   {
