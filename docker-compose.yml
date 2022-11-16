@@ -3,7 +3,7 @@ version: '3.4'
 services:
 
   cinesmac-app:
-    image: genesluna-dev/cinesmac-app:latest
+    image: genesluna/cinesmac-app:latest
     restart: unless-stopped
     env_file:
       - .env
