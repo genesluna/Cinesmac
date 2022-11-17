@@ -14,4 +14,4 @@ https://youtu.be/HokbfTFBImM
 
 Imagem da página inicial:
 
-![site image](https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_700/v1668702207/Cinesmac/cinesmac.jpg)
+![site image](https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_500/v1668702207/Cinesmac/cinesmac.jpg)
