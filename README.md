@@ -2,7 +2,7 @@
 
 Projeto desenvolvido para a disciplina de programação orientada a objetos do curso de ADS do Cesmac.
 
-O projeto do servidor foi feito usando DotNet 6, arquiterura limpa, CQRS, padrão Mediator, banco Postgres e cache com Redis. A aplicação cliente foi feita usando Angular 13.
+O projeto do servidor foi feito usando DotNet 6, arquitetura limpa, CQRS, padrão Mediator, banco Postgres e cache com Redis. A aplicação cliente foi feita usando Angular 13.
 
 O projeto final foi conteinerizado e publicado no seguinte endereço:
 
