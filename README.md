@@ -1,17 +1,17 @@
-## Cinesmac - Sistema para compra de ingressos de cinema
+## Cinesmac - System for buying movie tickets
 
-Projeto desenvolvido para a disciplina de programação orientada a objetos do curso de ADS do Cesmac.
+Project developed for the object-oriented programming discipline of the Cesmac ADS course.
 
-O projeto do servidor foi feito usando DotNet 6, arquitetura limpa, CQRS, padrão Mediator, banco Postgres e cache com Redis. A aplicação cliente foi feita usando Angular 13.
+The server design was done using DotNet 6, clean architecture, CQRS, Mediator pattern, Postgres database and cache with Redis. The client application was made using Angular 13.
 
-O projeto final foi conteinerizado e publicado no seguinte endereço:
+The final project was containerized and published at the following address:
 
 https://cinesmac.genesluna.dev
 
-Vídeo de demonstração em:
+Demo video at:
 
 https://youtu.be/HokbfTFBImM
 
-Imagem da página inicial:
+Home page image:
 
 ![site image](https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_500/v1668702207/Cinesmac/cinesmac.jpg)
