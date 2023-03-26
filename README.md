@@ -1,4 +1,4 @@
-## Cinesmac - System for buying movie tickets
+## Cinesmac - Application for buying movie tickets
 
 Project developed for the object-oriented programming discipline of the Cesmac ADS course.
 
