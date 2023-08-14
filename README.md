@@ -8,10 +8,6 @@ The final project was containerized and published at the following address:
 
 https://cinesmac.genesluna.dev
 
-Demo video at:
-
-https://youtu.be/HokbfTFBImM
-
 Home page image:
 
 ![site image](https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_500/v1668702207/Cinesmac/cinesmac.jpg)
