@@ -8,8 +8,10 @@ The server design was done using DotNet 6, clean architecture, CQRS, Mediator pa
 
 The final project was containerized and published at the following address:
 
-https://cinesmac.genesluna.dev
+#### 🌐 Página WEB: [clique aqui](https://cinesmac.genesluna.dev/)
 
-Home page image:
+#### 🚀Swagger: [clique aqui](https://cinesmac.genesluna.dev/swagger/index.html)
+
+Home page snapshot:
 
 ![site image](https://res.cloudinary.com/dxylve8nt/image/upload/c_scale,w_500/v1668702207/Cinesmac/cinesmac.jpg)
