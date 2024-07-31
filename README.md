@@ -4,7 +4,7 @@
 
 Project developed for the object-oriented programming discipline of the Cesmac ADS course.
 
-The server design was done using DotNet 6, clean architecture, CQRS, Mediator pattern, Postgres database and cache with Redis. The client application was made using Angular 13.
+The server design was done using DotNet 6, clean architecture, CQRS, Mediator pattern, Postgres database and cache with Redis. The client application was made using Angular.
 
 The final project was containerized and published at the following address:
 
