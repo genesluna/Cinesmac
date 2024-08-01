@@ -6,8 +6,6 @@ Project developed for the object-oriented programming discipline of the Cesmac A
 
 The server design was done using DotNet 6, clean architecture, CQRS, Mediator pattern, Postgres database and cache with Redis. The client application was made using Angular.
 
-The final project was containerized and published at the following address:
-
 #### 🌐 Página WEB: [clique aqui](https://cinesmac.genesluna.dev/)
 
 #### 🚀Swagger: [clique aqui](https://cinesmac.genesluna.dev/swagger/index.html)
